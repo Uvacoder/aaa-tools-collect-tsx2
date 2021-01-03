@@ -8,6 +8,7 @@ import Sidebar from './components/Sidebar';
 import JSONFormatterValidator from './components/jsonformattervalidator';
 import JWTDecoder from './components/jwtdecoder';
 import UnixTimeConverter from './components/unixtimeconverter';
+import SSLInformation from './components/sslinformation';
 
 const { Content, Footer } = Layout;
 
@@ -29,10 +30,11 @@ export default function App() {
             }}
           >
             <Switch>
-              <Route
+            <Route
                 path="/json-formater-validator"
                 component={JSONFormatterValidator}
               />
+              <Route path="/ssl-information" component={SSLInformation} />
               <Route path="/jwt-decoder" component={JWTDecoder} />
               <Route
                 path="/unix-time-converter"
