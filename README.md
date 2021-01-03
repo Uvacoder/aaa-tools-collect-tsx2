@@ -10,6 +10,7 @@ A Must Developer Necessary App.
 - JWT decoder
 - Unix Time Converter
 - SSL Information
+- Base64 Decoder/Encoder
 - [Request a Feature](https://github.com/AndresMorelos/devapp/issues/new)
 
 ## Icon

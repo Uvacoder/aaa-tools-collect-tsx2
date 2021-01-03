@@ -111,7 +111,7 @@ class JSONFormatterValidator extends React.Component {
     return (
       <Row style={{ padding: '15px' }}>
         <Col span={12}>
-          <TextArea rows={26} onChange={this.onTextAreaChange} />
+          <TextArea rows={23} onChange={this.onTextAreaChange} />
         </Col>
         <Col span={11} offset={1}>
           <Select
@@ -127,7 +127,7 @@ class JSONFormatterValidator extends React.Component {
             Copy
           </Button>
           <pre
-            style={{ border: '1px solid', height: '93%', padding: '5px' }}
+            style={{ border: '1px solid', height: '91%', padding: '5px' }}
             dangerouslySetInnerHTML={this.prettyJson()}
           />
         </Col>

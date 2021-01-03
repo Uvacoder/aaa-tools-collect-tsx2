@@ -34,7 +34,6 @@ class UnixTimeConverter extends React.Component {
           <InputNumber
             style={{ width: '50%' }}
             min={0}
-            step={0.1}
             defaultValue={915148798.75}
             onChange={this.onInputChange}
           />
