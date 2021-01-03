@@ -1,0 +1,26 @@
+/*
+ * @NOTE: Prepend a `~` to css file paths that are in your node_modules
+ *        See https://github.com/webpack-contrib/sass-loader#imports
+ */
+
+@import '~antd/dist/antd.css';
+
+.site-layout-background {
+  background-color: white;
+}
+
+.string {
+  color: #6caedd;
+}
+
+.key {
+  color: #ec5f67;
+}
+
+.boolean {
+  color: #99c794;
+}
+
+.number {
+  color: #99c794;
+}
