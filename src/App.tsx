@@ -45,8 +45,8 @@ export default function App() {
               Created with ♥ by{' '}
               <a className="js-external-link" href="https://andresmorelos.dev">
                 Andres Morelos
-              </a>{' '}
-              ,
+              </a>
+              ,{' '}
               <a
                 className="js-external-link"
                 href="https://github.com/AndresMorelos"

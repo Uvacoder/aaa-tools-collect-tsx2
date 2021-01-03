@@ -178,7 +178,7 @@ export default class MenuBuilder {
         : subMenuViewProd;
 
     //return [subMenuAbout, subMenuEdit, subMenuView, subMenuWindow, subMenuHelp];
-    return [subMenuAbout, subMenuHelp];
+    return [subMenuAbout, subMenuEdit, subMenuHelp];
   }
 
   buildDefaultTemplate() {
