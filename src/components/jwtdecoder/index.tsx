@@ -109,7 +109,7 @@ class JWTDecoder extends React.Component {
     return (
       <Row style={{ padding: '15px' }}>
         <Col span={12}>
-          <TextArea rows={26} onChange={this.onTextAreaChange} />
+          <TextArea rows={23} onChange={this.onTextAreaChange} />
         </Col>
         <Col span={11} offset={1}>
           <h4>
@@ -124,7 +124,7 @@ class JWTDecoder extends React.Component {
           </h4>
 
           <pre
-            style={{ border: '1px solid', height: '44%', padding: '5px' }}
+            style={{ border: '1px solid', height: '41%', padding: '5px' }}
             dangerouslySetInnerHTML={this.prettyJson(headers)}
           />
           <h4>
@@ -139,7 +139,7 @@ class JWTDecoder extends React.Component {
           </h4>
 
           <pre
-            style={{ border: '1px solid', height: '44%', padding: '5px' }}
+            style={{ border: '1px solid', height: '41%', padding: '5px' }}
             dangerouslySetInnerHTML={this.prettyJson(payload)}
           />
         </Col>

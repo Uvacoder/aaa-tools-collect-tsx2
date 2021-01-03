@@ -7,6 +7,7 @@ import {
 } from '@ant-design/icons';
 import JwtIcon from '../icons/jwtIcon';
 import BracketsIcon from '../icons/brackets';
+import Base64Icon from '../icons/base64';
 
 const { Sider } = Layout;
 
@@ -14,6 +15,8 @@ class Sidebar extends React.Component {
   componentDidMount() {}
 
   render() {
+    const { theme } = this.props;
+
     return (
       <Sider
         style={{
@@ -25,7 +28,7 @@ class Sidebar extends React.Component {
       >
         <Menu
           mode="inline"
-          theme="dark"
+          theme={theme}
           defaultSelectedKeys={['1']}
           style={{ height: '100%', borderRight: 0 }}
         >
@@ -47,6 +50,11 @@ class Sidebar extends React.Component {
           <Menu.Item key="4" icon={<SafetyCertificateOutlined />}>
             <Link to="/ssl-information" style={{ fontSize: '0.9em' }}>
               SSL verification
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="5" icon={<Base64Icon fill="white" />}>
+            <Link to="/base64" style={{ fontSize: '0.9em' }}>
+              Base64 Encoder/Decoder
             </Link>
           </Menu.Item>
         </Menu>
