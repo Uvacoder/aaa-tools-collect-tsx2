@@ -1,7 +1,10 @@
 import React from 'react';
 import { Layout, Menu } from 'antd';
 import { Link } from 'react-router-dom';
-import { ClockCircleOutlined } from '@ant-design/icons';
+import {
+  ClockCircleOutlined,
+  SafetyCertificateOutlined,
+} from '@ant-design/icons';
 import JwtIcon from '../icons/jwtIcon';
 import BracketsIcon from '../icons/brackets';
 
@@ -39,6 +42,11 @@ class Sidebar extends React.Component {
           <Menu.Item key="3" icon={<ClockCircleOutlined />}>
             <Link to="/unix-time-converter" style={{ fontSize: '0.9em' }}>
               Unix Time Converter
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="4" icon={<SafetyCertificateOutlined />}>
+            <Link to="/ssl-information" style={{ fontSize: '0.9em' }}>
+              SSL verification
             </Link>
           </Menu.Item>
         </Menu>
