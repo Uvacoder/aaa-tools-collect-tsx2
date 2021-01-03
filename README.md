@@ -9,7 +9,9 @@ A Must Developer Necessary App.
 - JSON formatter & Validator
 - JWT decoder
 - Unix Time Converter
+- SSL Information
 - [Request a Feature](https://github.com/AndresMorelos/devapp/issues/new)
 
-## Icon 
+## Icon
+
 Thanks to [Wish Forge](http://wishforge.games/) to leave me to use its icon as the app icon.
