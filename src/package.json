@@ -1,7 +1,7 @@
 {
   "name": "developer-utils-app",
   "productName": "Developer Utils App",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Developer Must Necessary App",
   "main": "./main.prod.js",
   "author": {
