@@ -4,6 +4,7 @@
 ![TypeScript](https://img.shields.io/badge/-TypeScript-05122A?style=flat&logo=typescript)&nbsp;
 ![React](https://img.shields.io/badge/-React-05122A?style=flat&logo=React)&nbsp;
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/AndresMorelos/developer-utils-app)&nbsp;
+![GitHub all releases](https://img.shields.io/github/downloads/AndresMorelos/developer-utils-app/total)&nbsp;
 
 A Must Developer Necessary App.
 
