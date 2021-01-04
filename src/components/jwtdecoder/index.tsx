@@ -3,6 +3,7 @@ import { Input, Row, Col, Button } from 'antd';
 import { CopyOutlined } from '@ant-design/icons';
 import * as jwt from 'jsonwebtoken';
 import { clipboard } from 'electron';
+import PrettyJson from '../../helpers/prettyJson';
 
 const { TextArea } = Input;
 
@@ -49,39 +50,6 @@ class JWTDecoder extends React.Component {
     }
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  prettyJson(json: string) {
-    if (json) {
-      // eslint-disable-next-line no-param-reassign
-      json = json
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
-
-      return {
-        __html: json.replace(
-          /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
-          function (match) {
-            let cls = 'number';
-            if (/^"/.test(match)) {
-              if (/:$/.test(match)) {
-                cls = 'key';
-              } else {
-                cls = 'string';
-              }
-            } else if (/true|false/.test(match)) {
-              cls = 'boolean';
-            } else if (/null/.test(match)) {
-              cls = 'null';
-            }
-            return `<span class="${cls}">${match}</span>`;
-          }
-        ),
-      };
-    }
-
-    return { __html: undefined };
-  }
 
   // eslint-disable-next-line class-methods-use-this
   Copy(event: any) {
@@ -125,7 +93,7 @@ class JWTDecoder extends React.Component {
 
           <pre
             style={{ border: '1px solid', height: '41%', padding: '5px' }}
-            dangerouslySetInnerHTML={this.prettyJson(headers)}
+            dangerouslySetInnerHTML={PrettyJson(headers)}
           />
           <h4>
             Payload{' '}
@@ -140,7 +108,7 @@ class JWTDecoder extends React.Component {
 
           <pre
             style={{ border: '1px solid', height: '41%', padding: '5px' }}
-            dangerouslySetInnerHTML={this.prettyJson(payload)}
+            dangerouslySetInnerHTML={PrettyJson(payload)}
           />
         </Col>
       </Row>

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import {
   ClockCircleOutlined,
   SafetyCertificateOutlined,
+  LinkOutlined,
 } from '@ant-design/icons';
 import JwtIcon from '../icons/jwtIcon';
 import BracketsIcon from '../icons/brackets';
@@ -55,6 +56,11 @@ class Sidebar extends React.Component {
           <Menu.Item key="5" icon={<Base64Icon fill="white" />}>
             <Link to="/base64" style={{ fontSize: '0.9em' }}>
               Base64 Encoder/Decoder
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="6" icon={<LinkOutlined />}>
+            <Link to="/url-decoder" style={{ fontSize: '0.9em' }}>
+              URL Decoder
             </Link>
           </Menu.Item>
         </Menu>
