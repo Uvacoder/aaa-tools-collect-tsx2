@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 // Small helpers you might want to keep
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Layout, Row, Col } from 'antd';
+import PackageJson from './package.json';
 // eslint-disable-next-line import/extensions
 import './helpers/external_links.ts';
 import SwitchTheme from './components/SwitchTheme';
@@ -11,6 +12,7 @@ import JWTDecoder from './components/jwtdecoder';
 import UnixTimeConverter from './components/unixtimeconverter';
 import SSLInformation from './components/sslinformation';
 import Base64 from './components/base64';
+import URLDecoder from './components/urldecoder';
 
 const { Content, Footer, Header } = Layout;
 
@@ -51,6 +53,7 @@ export default function App() {
             }}
           >
             <Switch>
+              <Route path="/url-decoder" component={URLDecoder} />
               <Route
                 path="/json-formater-validator"
                 component={JSONFormatterValidator}
@@ -77,6 +80,7 @@ export default function App() {
               >
                 Github Profile
               </a>
+              , Version {PackageJson.version}
             </Footer>
           </Content>
         </Layout>
