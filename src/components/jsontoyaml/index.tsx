@@ -70,7 +70,7 @@ class JSONtoYaml extends React.Component {
             Copy
           </Button>
           <pre
-            style={{ border: '1px solid', height: '91%', padding: '5px' }}
+            style={{ border: '1px solid', height: '91%', maxHeight: '478px' }}
             className="language-yaml"
             dangerouslySetInnerHTML={this.prettyYAML(yaml)}
           />
