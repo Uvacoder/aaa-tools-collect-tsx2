@@ -2,7 +2,8 @@ import React from 'react';
 import { Input, Row, Col, Select, Button } from 'antd';
 import { CopyOutlined } from '@ant-design/icons';
 import { clipboard } from 'electron';
-import PrettyJson from '../../helpers/prettyJson';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-json';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -13,7 +14,7 @@ class JSONFormatterValidator extends React.Component {
 
     this.state = {
       jsonValue: null,
-      jsonParsed: null,
+      jsonParsed: '',
       space: 2,
     };
 
@@ -23,7 +24,9 @@ class JSONFormatterValidator extends React.Component {
     this.parseJson = this.parseJson.bind(this);
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    Prism.highlightAll();
+  }
 
   onTextAreaChange(event: any) {
     try {
@@ -45,7 +48,7 @@ class JSONFormatterValidator extends React.Component {
       } else {
         this.setState({
           jsonValue: null,
-          jsonParsed: null,
+          jsonParsed: '',
         });
       }
     }
@@ -76,6 +79,13 @@ class JSONFormatterValidator extends React.Component {
     return null;
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  prettyJSON(value) {
+    return {
+      __html: Prism.highlight(value, Prism.languages.json, 'json'),
+    };
+  }
+
   render() {
     const { jsonParsed } = this.state;
     return (
@@ -98,7 +108,8 @@ class JSONFormatterValidator extends React.Component {
           </Button>
           <pre
             style={{ border: '1px solid', height: '91%', padding: '5px' }}
-            dangerouslySetInnerHTML={PrettyJson(jsonParsed)}
+            className="language-json"
+            dangerouslySetInnerHTML={this.prettyJSON(jsonParsed)}
           />
         </Col>
       </Row>

@@ -3,24 +3,22 @@
  *        See https://github.com/webpack-contrib/sass-loader#imports
  */
 
-@import '~antd/dist/antd.css';
+ @import '~antd/dist/antd.css';
+ @import '~prismjs/themes/prism-okaidia.css';
 
-.site-layout-background {
-  background-color: white;
+.site-layout-background-light {
+  background-color: #fff;
 }
 
-.string {
-  color: #6caedd;
+
+.site-layout-background-dark {
+  background-color: #001529;
 }
 
-.key {
-  color: #ec5f67;
+.color-light{
+  color: #001529 !important;
 }
 
-.boolean {
-  color: #99c794;
-}
-
-.number {
-  color: #99c794;
+.color-dark{
+  color: #fff !important;
 }

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Layout, Row, Col } from 'antd';
 import PackageJson from './package.json';
+
 // eslint-disable-next-line import/extensions
 import './helpers/external_links.ts';
 import SwitchTheme from './components/SwitchTheme';
@@ -13,6 +14,8 @@ import UnixTimeConverter from './components/unixtimeconverter';
 import SSLInformation from './components/sslinformation';
 import Base64 from './components/base64';
 import URLDecoder from './components/urldecoder';
+import JSONtoYaml from './components/jsontoyaml';
+import YamlToJSON from './components/yamltojson';
 
 const { Content, Footer, Header } = Layout;
 
@@ -25,19 +28,16 @@ export default function App() {
 
   return (
     <Router>
-      <Layout>
+      <Layout className={`site-layout-background-${theme}`}>
         <Sidebar theme={theme} />
-        <Layout
-          className="site-layout"
-          style={{ marginLeft: 200, height: '700px' }}
-        >
+        <Layout style={{ marginLeft: 200, height: '700px' }}>
           <Header
-            className="site-layout-background"
+            className={`site-layout-background-${theme}`}
             style={{ padding: 0, textAlign: 'right' }}
           >
             <Row>
               <Col span={6}>
-                <h3>Developer Utils App</h3>
+                <h3 className={`color-${theme}`}>Developer Utils App</h3>
               </Col>
               <Col span={6} offset={11}>
                 <SwitchTheme onChange={changeTheme} />
@@ -45,7 +45,6 @@ export default function App() {
             </Row>
           </Header>
           <Content
-            className="site-layout-background"
             style={{
               margin: '24px 16px 0',
               overflow: 'initial',
@@ -53,6 +52,8 @@ export default function App() {
             }}
           >
             <Switch>
+              <Route path="/json-to-yaml" component={JSONtoYaml} />
+              <Route path="/yaml-to-json" component={YamlToJSON} />
               <Route path="/url-decoder" component={URLDecoder} />
               <Route
                 path="/json-formater-validator"
@@ -67,22 +68,25 @@ export default function App() {
               />
               <Route path="/" component={JSONFormatterValidator} />
             </Switch>
-            <Footer style={{ textAlign: 'center' }}>
-              {' '}
-              Created with ♥ by{' '}
-              <a className="js-external-link" href="https://andresmorelos.dev">
-                Andres Morelos
-              </a>
-              ,{' '}
-              <a
-                className="js-external-link"
-                href="https://github.com/AndresMorelos"
-              >
-                Github Profile
-              </a>
-              , Version {PackageJson.version}
-            </Footer>
           </Content>
+          <Footer
+            style={{ textAlign: 'center'}}
+            className={`color-${theme} site-layout-background-${theme}`}
+          >
+            {' '}
+            Created with ♥ by{' '}
+            <a className="js-external-link" href="https://andresmorelos.dev">
+              Andres Morelos
+            </a>
+            ,{' '}
+            <a
+              className="js-external-link"
+              href="https://github.com/AndresMorelos"
+            >
+              Github Profile
+            </a>
+            , Version {PackageJson.version}
+          </Footer>
         </Layout>
       </Layout>
     </Router>

@@ -2,21 +2,21 @@ import React from 'react';
 import { Input, Row, Col, Select, Button } from 'antd';
 import { CopyOutlined } from '@ant-design/icons';
 import { clipboard } from 'electron';
-import URL from 'url';
+import yml from 'js-yaml';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-json';
 
 const { TextArea } = Input;
 const { Option } = Select;
 
-class JSONFormatterValidator extends React.Component {
+class JSONtoYaml extends React.Component {
   constructor(props: any) {
     super(props);
 
     this.state = {
+      json: '',
+      jsonParsed: '',
       space: 2,
-      dataDecode: '',
-      data: null,
     };
 
     this.onTextAreaChange = this.onTextAreaChange.bind(this);
@@ -31,27 +31,24 @@ class JSONFormatterValidator extends React.Component {
 
   onTextAreaChange(event: any) {
     try {
-      const data = URL.parse(event.target.value, true);
-
-      this.setState((state, props) => {
-        this.parseJson(data, state.space);
-
-        return {
-          data,
-        };
-      });
-    } catch (error) {
-      if (event.target.value) {
+      const json = yml.load(event.target.value);
+      console.log(json);
+      if (json) {
+        this.parseJson(json, this.state.space);
         this.setState({
-          data: null,
-          dataDecode: error.message,
+          json,
         });
       } else {
         this.setState({
-          data: null,
-          dataDecode: '',
+          jsonParsed: '',
+          json: '',
         });
       }
+    } catch (error) {
+      this.setState({
+        jsonParsed: '',
+        json: '',
+      });
     }
   }
 
@@ -59,23 +56,22 @@ class JSONFormatterValidator extends React.Component {
     this.setState((state, prop) => {
       const space = parseInt(value, 10);
 
-      this.parseJson(state.data, space);
+      this.parseJson(state.json, space);
 
       return { space };
     });
   }
 
   parseJson(value: string, space: number) {
-    const dataDecode = JSON.stringify(value, null, space);
-
+    const jsonParsed = JSON.stringify(value, null, space);
     this.setState({
-      dataDecode,
+      jsonParsed,
     });
   }
 
   Copy(event) {
-    if (this.state.dataDecode) {
-      clipboard.writeText(this.state.dataDecode);
+    if (this.state.jsonParsed) {
+      clipboard.writeText(this.state.jsonParsed);
     }
     return null;
   }
@@ -88,7 +84,7 @@ class JSONFormatterValidator extends React.Component {
   }
 
   render() {
-    const { dataDecode } = this.state;
+    const { jsonParsed } = this.state;
     return (
       <Row style={{ padding: '15px' }}>
         <Col span={12}>
@@ -109,8 +105,8 @@ class JSONFormatterValidator extends React.Component {
           </Button>
           <pre
             style={{ border: '1px solid', height: '91%', padding: '5px' }}
-            className="language-json"
-            dangerouslySetInnerHTML={this.prettyJSON(dataDecode)}
+            className="language-yaml"
+            dangerouslySetInnerHTML={this.prettyJSON(jsonParsed)}
           />
         </Col>
       </Row>
@@ -118,4 +114,4 @@ class JSONFormatterValidator extends React.Component {
   }
 }
 
-export default JSONFormatterValidator;
+export default JSONtoYaml;
