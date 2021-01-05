@@ -3,7 +3,8 @@ import { Input, Row, Col, Button } from 'antd';
 import { CopyOutlined } from '@ant-design/icons';
 import * as jwt from 'jsonwebtoken';
 import { clipboard } from 'electron';
-import PrettyJson from '../../helpers/prettyJson';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-json';
 
 const { TextArea } = Input;
 
@@ -20,7 +21,9 @@ class JWTDecoder extends React.Component {
     this.Copy = this.Copy.bind(this);
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    Prism.highlightAll();
+  }
 
   onTextAreaChange(event: any) {
     try {
@@ -50,7 +53,6 @@ class JWTDecoder extends React.Component {
     }
   }
 
-
   // eslint-disable-next-line class-methods-use-this
   Copy(event: any) {
     const dataShown = event.target.parentNode.getAttribute('data-shown');
@@ -69,6 +71,13 @@ class JWTDecoder extends React.Component {
       }
       clipboard.writeText(dataToCopy);
     }
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  prettyJSON(value) {
+    return {
+      __html: Prism.highlight(value, Prism.languages.json, 'json'),
+    };
   }
 
   render() {
@@ -93,7 +102,8 @@ class JWTDecoder extends React.Component {
 
           <pre
             style={{ border: '1px solid', height: '41%', padding: '5px' }}
-            dangerouslySetInnerHTML={PrettyJson(headers)}
+            className="language-json"
+            dangerouslySetInnerHTML={this.prettyJSON(headers)}
           />
           <h4>
             Payload{' '}
@@ -108,7 +118,8 @@ class JWTDecoder extends React.Component {
 
           <pre
             style={{ border: '1px solid', height: '41%', padding: '5px' }}
-            dangerouslySetInnerHTML={PrettyJson(payload)}
+            className="language-json"
+            dangerouslySetInnerHTML={this.prettyJSON(payload)}
           />
         </Col>
       </Row>

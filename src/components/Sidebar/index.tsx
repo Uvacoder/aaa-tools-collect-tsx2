@@ -63,6 +63,16 @@ class Sidebar extends React.Component {
               URL Decoder
             </Link>
           </Menu.Item>
+          <Menu.Item key="7" icon={<BracketsIcon fill="white" />}>
+            <Link to="/json-to-yaml" style={{ fontSize: '0.9em' }}>
+              JSON to YAML
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="8" icon={<BracketsIcon fill="white" />}>
+            <Link to="/yaml-to-json" style={{ fontSize: '0.9em' }}>
+              YAML to JSON
+            </Link>
+          </Menu.Item>
         </Menu>
       </Sider>
     );

@@ -18,6 +18,8 @@ A Must Developer Necessary App.
 - SSL Information
 - Base64 Decoder/Encoder
 - URL Decoder
+- JSON to YAML
+- YAML to JSON
 - [Request a Feature](https://github.com/AndresMorelos/devapp/issues/new)
 
 
