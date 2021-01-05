@@ -101,7 +101,7 @@ class JWTDecoder extends React.Component {
           </h4>
 
           <pre
-            style={{ border: '1px solid', height: '41%', padding: '5px' }}
+            style={{ border: '1px solid', height: '41%', maxHeight: '320px' }}
             className="language-json"
             dangerouslySetInnerHTML={this.prettyJSON(headers)}
           />
@@ -117,7 +117,7 @@ class JWTDecoder extends React.Component {
           </h4>
 
           <pre
-            style={{ border: '1px solid', height: '41%', padding: '5px' }}
+            style={{ border: '1px solid', height: '41%', maxHeight: '320px' }}
             className="language-json"
             dangerouslySetInnerHTML={this.prettyJSON(payload)}
           />

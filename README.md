@@ -6,7 +6,7 @@
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/AndresMorelos/developer-utils-app)&nbsp;
 ![GitHub all releases](https://img.shields.io/github/downloads/AndresMorelos/developer-utils-app/total)&nbsp;
 
-A Must Developer Necessary App.
+A Must Necessary Developer App.
 
 ![Developer Utils App](./.erb/img/dev-utils-app.png)
 
