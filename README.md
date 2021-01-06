@@ -20,6 +20,7 @@ A Must Necessary Developer App.
 - URL Decoder
 - JSON to YAML
 - YAML to JSON
+- Diff viewer
 - [Request a Feature](https://github.com/AndresMorelos/devapp/issues/new)
 
 
