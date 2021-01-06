@@ -28,7 +28,7 @@ A Must Necessary Developer App.
 
 - Win: ✅
 - Linux: ✅
-- Mac: ❌ (I need to buy the developer certificate)
+- Mac: ✅ (I still need to buy the developer certificate)
 
 ## Releases
 
