@@ -7,7 +7,6 @@ const SwitchTheme = (props) => {
   const { onChange } = props;
   return (
     <div>
-      Theme{' '}
       <Switch
         onChange={onChange}
         checkedChildren={<MoonIcon width="5" height="5" />}

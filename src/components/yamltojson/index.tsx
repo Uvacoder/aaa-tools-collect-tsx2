@@ -32,7 +32,6 @@ class JSONtoYaml extends React.Component {
   onTextAreaChange(event: any) {
     try {
       const json = yml.load(event.target.value);
-      console.log(json);
       if (json) {
         this.parseJson(json, this.state.space);
         this.setState({

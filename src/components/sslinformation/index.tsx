@@ -53,7 +53,6 @@ class SSLInformation extends React.Component {
 
   // eslint-disable-next-line class-methods-use-this
   checkDomain(value: string) {
-    console.log(value);
     return /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$/.test(
       value
     );
