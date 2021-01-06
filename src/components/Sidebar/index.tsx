@@ -5,6 +5,7 @@ import {
   ClockCircleOutlined,
   SafetyCertificateOutlined,
   LinkOutlined,
+  DiffOutlined,
 } from '@ant-design/icons';
 import JwtIcon from '../icons/jwtIcon';
 import BracketsIcon from '../icons/brackets';
@@ -71,6 +72,11 @@ class Sidebar extends React.Component {
           <Menu.Item key="8" icon={<BracketsIcon fill="white" />}>
             <Link to="/yaml-to-json" style={{ fontSize: '0.9em' }}>
               YAML to JSON
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="9" icon={<DiffOutlined />}>
+            <Link to="/diff" style={{ fontSize: '0.9em' }}>
+              Diff Viewer
             </Link>
           </Menu.Item>
         </Menu>

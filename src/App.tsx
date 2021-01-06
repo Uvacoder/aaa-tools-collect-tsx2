@@ -16,6 +16,7 @@ import Base64 from './components/base64';
 import URLDecoder from './components/urldecoder';
 import JSONtoYaml from './components/jsontoyaml';
 import YamlToJSON from './components/yamltojson';
+import DiffViewer from './components/diffViewer';
 
 const { Content, Footer, Header } = Layout;
 
@@ -53,6 +54,7 @@ export default function App() {
           >
             <Switch>
               <Route path="/json-to-yaml" component={JSONtoYaml} />
+              <Route path="/diff" component={DiffViewer} />
               <Route path="/yaml-to-json" component={YamlToJSON} />
               <Route path="/url-decoder" component={URLDecoder} />
               <Route
