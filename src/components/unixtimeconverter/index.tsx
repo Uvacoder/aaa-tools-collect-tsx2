@@ -39,22 +39,24 @@ class UnixTimeConverter extends React.Component {
   }
 
   setDate(value: any, format: string) {
-    const date = new Date(value);
-    let dateParsed = '';
-    switch (format) {
-      case 'local':
-        dateParsed = this.toISOLocal(date);
-        break;
-      case 'utc':
-        dateParsed = date.toISOString();
-        break;
-      default:
-        break;
-    }
-    this.setState({
-      date: value,
-      dateParsed,
-    });
+    try {
+      const date = new Date(value);
+      let dateParsed = '';
+      switch (format) {
+        case 'local':
+          dateParsed = this.toISOLocal(date);
+          break;
+        case 'utc':
+          dateParsed = date.toISOString();
+          break;
+        default:
+          break;
+      }
+      this.setState({
+        date: value,
+        dateParsed,
+      });
+    } catch (error) {}
   }
 
   // eslint-disable-next-line class-methods-use-this
