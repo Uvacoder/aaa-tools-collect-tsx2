@@ -38,7 +38,7 @@ export default function App() {
           >
             <Row>
               <Col span={6}>
-                <h3 className={`color-${theme}`}>Developer Utils App</h3>
+                <h3 className={`color-${theme}`}>Developer ToolBox</h3>
               </Col>
               <Col span={6} offset={11}>
                 <SwitchTheme onChange={changeTheme} />

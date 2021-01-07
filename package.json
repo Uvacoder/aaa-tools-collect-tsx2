@@ -1,6 +1,6 @@
 {
-  "name": "developer-utils-app",
-  "productName": "Developer Utils App",
+  "name": "developer-toolbox",
+  "productName": "Developer ToolBox",
   "description": "A Developer Must Necessary App",
   "scripts": {
     "build": "concurrently \"yarn build:main\" \"yarn build:renderer\"",
