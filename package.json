@@ -1,7 +1,7 @@
 {
   "name": "developer-toolbox",
   "productName": "Developer ToolBox",
-  "description": "A Developer Must Necessary App",
+  "description": "A Developer Must Necessary Toolbox",
   "scripts": {
     "build": "concurrently \"yarn build:main\" \"yarn build:renderer\"",
     "build:main": "cross-env NODE_ENV=production webpack --config ./.erb/configs/webpack.config.main.prod.babel.js",
@@ -30,8 +30,8 @@
     ]
   },
   "build": {
-    "productName": "Developer Utils App",
-    "appId": "dev.andresmorelos.devutilsapp",
+    "productName": "Developer ToolBox",
+    "appId": "dev.andresmorelos.devtoolbox",
     "files": [
       "dist/",
       "node_modules/",
