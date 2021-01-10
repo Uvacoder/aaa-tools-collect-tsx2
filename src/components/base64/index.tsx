@@ -87,27 +87,31 @@ class Base64 extends React.Component {
   render() {
     const { result } = this.state;
     return (
-      <Row style={{ padding: '15px' }}>
+      <Row style={{ padding: '15px', height: '100%' }}>
         <Col span={12}>
           <Select
             defaultValue="encode"
-            style={{ width: 120, paddingBottom: '10px', paddingRight: '5px' }}
+            style={{ width: 120, marginBottom: '5px' }}
             onChange={this.onSelectChange}
           >
             <Option value="encode">Encode</Option>
             <Option value="decode">Decode</Option>
           </Select>
-          <TextArea rows={21} onChange={this.onTextAreaChange} />
+          <TextArea
+            rows={23}
+            onChange={this.onTextAreaChange}
+            className="textarea-input"
+          />
         </Col>
         <Col span={11} offset={1}>
           <Button
-            style={{ marginBottom: '10px' }}
+            style={{ marginBottom: '5px' }}
             icon={<CopyOutlined />}
             onClick={this.Copy}
           >
             Copy
           </Button>
-          <TextArea rows={21} value={result} />
+          <TextArea rows={23} value={result} className="textarea-input" />
         </Col>
       </Row>
     );

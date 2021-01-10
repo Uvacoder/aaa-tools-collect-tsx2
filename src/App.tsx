@@ -17,8 +17,9 @@ import URLDecoder from './components/urldecoder';
 import JSONtoYaml from './components/jsontoyaml';
 import YamlToJSON from './components/yamltojson';
 import DiffViewer from './components/diffViewer';
+import AboutPage from './components/about';
 
-const { Content, Footer, Header } = Layout;
+const { Content, Header } = Layout;
 
 export default function App() {
   const [theme = 'dark', setTheme] = useState();
@@ -31,27 +32,21 @@ export default function App() {
     <Router>
       <Layout className={`site-layout-background-${theme}`}>
         <Sidebar theme={theme} />
-        <Layout style={{ marginLeft: 200, height: '700px' }}>
+        <Layout style={{ marginLeft: 200 }}>
           <Header
             className={`site-layout-background-${theme}`}
             style={{ padding: 0, textAlign: 'right' }}
           >
             <Row>
-              <Col span={6}>
+              <Col offset={1}>
                 <h3 className={`color-${theme}`}>Developer ToolBox</h3>
               </Col>
-              <Col span={6} offset={11}>
+              <Col span={6} offset={10}>
                 <SwitchTheme onChange={changeTheme} />
               </Col>
             </Row>
           </Header>
-          <Content
-            style={{
-              margin: '24px 16px 0',
-              overflow: 'initial',
-              height: '100%',
-            }}
-          >
+          <Content className="content-layout">
             <Switch>
               <Route path="/json-to-yaml" component={JSONtoYaml} />
               <Route path="/diff" component={DiffViewer} />
@@ -68,27 +63,10 @@ export default function App() {
                 path="/unix-time-converter"
                 component={UnixTimeConverter}
               />
+              <Route path="/about" component={AboutPage} />
               <Route path="/" component={JSONFormatterValidator} />
             </Switch>
           </Content>
-          <Footer
-            style={{ textAlign: 'center'}}
-            className={`color-${theme} site-layout-background-${theme}`}
-          >
-            {' '}
-            Created with ♥ by{' '}
-            <a className="js-external-link" href="https://andresmorelos.dev">
-              Andres Morelos
-            </a>
-            ,{' '}
-            <a
-              className="js-external-link"
-              href="https://github.com/AndresMorelos"
-            >
-              Github Profile
-            </a>
-            , Version {PackageJson.version}
-          </Footer>
         </Layout>
       </Layout>
     </Router>

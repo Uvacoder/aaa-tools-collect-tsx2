@@ -6,6 +6,7 @@ import {
   SafetyCertificateOutlined,
   LinkOutlined,
   DiffOutlined,
+  QuestionCircleFilled,
 } from '@ant-design/icons';
 import JwtIcon from '../icons/jwtIcon';
 import BracketsIcon from '../icons/brackets';
@@ -77,6 +78,11 @@ class Sidebar extends React.Component {
           <Menu.Item key="9" icon={<DiffOutlined />}>
             <Link to="/diff" style={{ fontSize: '0.9em' }}>
               Diff Viewer
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="10" icon={<QuestionCircleFilled />}>
+            <Link to="/about" style={{ fontSize: '0.9em' }}>
+              About
             </Link>
           </Menu.Item>
         </Menu>
