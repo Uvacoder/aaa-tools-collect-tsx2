@@ -89,14 +89,18 @@ class JSONFormatterValidator extends React.Component {
   render() {
     const { jsonParsed } = this.state;
     return (
-      <Row style={{ padding: '15px' }}>
+      <Row style={{ padding: '15px', height: '100%' }}>
         <Col span={12}>
-          <TextArea rows={23} onChange={this.onTextAreaChange} />
+          <TextArea
+            rows={23}
+            onChange={this.onTextAreaChange}
+            className="textarea-input"
+          />
         </Col>
         <Col span={11} offset={1}>
           <Select
             defaultValue="2"
-            style={{ width: 120, paddingBottom: '10px', paddingRight: '5px' }}
+            style={{ width: 120, paddingRight: '5px' }}
             onChange={this.onSelectChange}
           >
             <Option value="2">2 spaces</Option>
@@ -107,8 +111,8 @@ class JSONFormatterValidator extends React.Component {
             Copy
           </Button>
           <pre
-            style={{ border: '1px solid', height: '91%', maxHeight: '478px' }}
-            className="language-json"
+            style={{ border: '1px solid' }}
+            className="language-json pre-response"
             dangerouslySetInnerHTML={this.prettyJSON(jsonParsed)}
           />
         </Col>

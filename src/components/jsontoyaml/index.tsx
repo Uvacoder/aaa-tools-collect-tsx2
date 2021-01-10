@@ -61,17 +61,21 @@ class JSONtoYaml extends React.Component {
   render() {
     const { yaml } = this.state;
     return (
-      <Row style={{ padding: '15px' }}>
+      <Row style={{ padding: '15px', height: '100%' }}>
         <Col span={12}>
-          <TextArea rows={23} onChange={this.onTextAreaChange} />
+          <TextArea
+            rows={23}
+            onChange={this.onTextAreaChange}
+            className="textarea-input"
+          />
         </Col>
         <Col span={11} offset={1}>
           <Button icon={<CopyOutlined />} onClick={this.Copy}>
             Copy
           </Button>
           <pre
-            style={{ border: '1px solid', height: '91%', maxHeight: '478px' }}
-            className="language-yaml"
+            style={{ border: '1px solid' }}
+            className="language-yaml pre-response"
             dangerouslySetInnerHTML={this.prettyYAML(yaml)}
           />
         </Col>

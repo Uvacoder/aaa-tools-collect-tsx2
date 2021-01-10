@@ -12,6 +12,7 @@ class Diffviewer extends React.Component {
     this.state = {
       oldValue: '',
       newValue: '',
+      expanded: ['1'],
     };
 
     this.onTextAreaOldChange = this.onTextAreaOldChange.bind(this);
@@ -33,27 +34,41 @@ class Diffviewer extends React.Component {
   }
 
   render() {
-    const { oldValue, newValue } = this.state;
+    const { oldValue, newValue, expanded } = this.state;
     return (
-      <Row style={{ overflowY: 'auto', maxHeight: '530px' }}>
-        <Col span={24} style={{ marginBottom: '5px' }}>
-          <Collapse defaultActiveKey={['1']}>
-            <Panel header="Source" key="1">
-              <Row>
-                <Col span={12}>
-                  First Source
-                  <TextArea rows={10} onChange={this.onTextAreaOldChange} />
-                </Col>
-                <Col span={11} offset={1}>
-                  Second Source
-                  <TextArea rows={10} onChange={this.onTextAreaNewChange} />
-                </Col>
-              </Row>
-            </Panel>
-          </Collapse>
-        </Col>
-        <ReactDiffViewer oldValue={oldValue} newValue={newValue} splitView />
-      </Row>
+      <>
+        <Row>
+          <Col span={24} style={{ marginBottom: '5px' }}>
+            <Collapse
+              defaultActiveKey={expanded}
+              onChange={(value) => this.setState({ expanded: value })}
+            >
+              <Panel header="Source" key="1">
+                <Row gutter={[16, 0]}>
+                  <Col span={12}>
+                    First Source
+                    <TextArea rows={10} onChange={this.onTextAreaOldChange} />
+                  </Col>
+                  <Col span={12}>
+                    Second Source
+                    <TextArea rows={10} onChange={this.onTextAreaNewChange} />
+                  </Col>
+                </Row>
+              </Panel>
+            </Collapse>
+          </Col>
+        </Row>
+        <Row
+          style={{
+            overflowY: 'auto',
+            ...(expanded.length > 0
+              ? { maxHeight: '65%' }
+              : { maxHeight: '93%' }),
+          }}
+        >
+          <ReactDiffViewer oldValue={oldValue} newValue={newValue} splitView />
+        </Row>
+      </>
     );
   }
 }

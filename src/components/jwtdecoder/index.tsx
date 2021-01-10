@@ -84,9 +84,13 @@ class JWTDecoder extends React.Component {
     const { payload, headers } = this.state;
 
     return (
-      <Row style={{ padding: '15px' }}>
+      <Row style={{ padding: '15px', height: '100%' }}>
         <Col span={12}>
-          <TextArea rows={23} onChange={this.onTextAreaChange} />
+          <TextArea
+            rows={23}
+            onChange={this.onTextAreaChange}
+            className="textarea-input"
+          />
         </Col>
         <Col span={11} offset={1}>
           <h4>
@@ -101,8 +105,8 @@ class JWTDecoder extends React.Component {
           </h4>
 
           <pre
-            style={{ border: '1px solid', height: '41%', maxHeight: '320px' }}
-            className="language-json"
+            style={{ border: '1px solid' }}
+            className="language-json pre-response-50"
             dangerouslySetInnerHTML={this.prettyJSON(headers)}
           />
           <h4>
@@ -117,8 +121,8 @@ class JWTDecoder extends React.Component {
           </h4>
 
           <pre
-            style={{ border: '1px solid', height: '41%', maxHeight: '320px' }}
-            className="language-json"
+            style={{ border: '1px solid' }}
+            className="language-json pre-response-50"
             dangerouslySetInnerHTML={this.prettyJSON(payload)}
           />
         </Col>
