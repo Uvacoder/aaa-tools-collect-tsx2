@@ -11,7 +11,7 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
-import { app, BrowserWindow, shell } from 'electron';
+import { app, BrowserWindow, shell, dialog } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
@@ -21,6 +21,19 @@ export default class AppUpdater {
     log.transports.file.level = 'info';
     autoUpdater.logger = log;
     autoUpdater.checkForUpdatesAndNotify();
+
+    autoUpdater.on('error', (error) => {
+      dialog.showMessageBox(null, {
+        type: 'error',
+        title: 'Something went wrong',
+        message:
+          'Developer Toolbox auto updater failed. Check ' +
+          'https://github.com/AndresMorelos/developer-toolbox/releases for the latest updates and ' +
+          'please create an issue.',
+        details: JSON.stringify(error),
+        buttons: ['Okey'],
+      });
+    });
   }
 }
 
