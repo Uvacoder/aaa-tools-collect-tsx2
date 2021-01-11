@@ -2,6 +2,7 @@
 name: Question
 about: Ask a question.❓
 labels: 'question'
+title: "[QUESTION] :"
 ---
 
 ## Summary

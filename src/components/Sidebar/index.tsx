@@ -8,9 +8,9 @@ import {
   DiffOutlined,
   QuestionCircleFilled,
 } from '@ant-design/icons';
-import JwtIcon from '../icons/jwtIcon';
-import BracketsIcon from '../icons/brackets';
-import Base64Icon from '../icons/base64';
+import JwtIcon from '../../icons/jwtIcon';
+import BracketsIcon from '../../icons/brackets';
+import Base64Icon from '../../icons/base64';
 
 const { Sider } = Layout;
 
