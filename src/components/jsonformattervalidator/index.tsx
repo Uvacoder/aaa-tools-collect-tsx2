@@ -3,7 +3,7 @@ import { Input, Row, Col, Select, Button } from 'antd';
 import { CopyOutlined } from '@ant-design/icons';
 import { clipboard } from 'electron';
 import Prism from 'prismjs';
-import 'prismjs/components/prism-json';
+import CodeView from '../commons/codeView';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -110,11 +110,7 @@ class JSONFormatterValidator extends React.Component {
           <Button icon={<CopyOutlined />} onClick={this.Copy}>
             Copy
           </Button>
-          <pre
-            style={{ border: '1px solid' }}
-            className="language-json pre-response"
-            dangerouslySetInnerHTML={this.prettyJSON(jsonParsed)}
-          />
+          <CodeView code={this.prettyJSON(jsonParsed)} language="json" />
         </Col>
       </Row>
     );

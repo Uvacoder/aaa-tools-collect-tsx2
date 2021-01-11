@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch } from 'antd';
-import SunIcon from '../icons/sun';
-import MoonIcon from '../icons/moon';
+import SunIcon from '../../icons/sun';
+import MoonIcon from '../../icons/moon';
 
 const SwitchTheme = (props) => {
   const { onChange } = props;
