@@ -1,7 +1,8 @@
 import React from 'react';
 import { Input, Row, Col, Select, Button } from 'antd';
 import { CopyOutlined } from '@ant-design/icons';
-import { clipboard } from 'electron';
+import { withTranslation } from 'react-i18next';
+import Copy from '../../../utils/copy';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -18,7 +19,7 @@ class Base64 extends React.Component {
 
     this.onTextAreaChange = this.onTextAreaChange.bind(this);
     this.onSelectChange = this.onSelectChange.bind(this);
-    this.Copy = this.Copy.bind(this);
+
     this.EncodeDecode = this.EncodeDecode.bind(this);
   }
 
@@ -77,15 +78,11 @@ class Base64 extends React.Component {
     });
   }
 
-  Copy(event) {
-    if (this.state.result) {
-      clipboard.writeText(this.state.result);
-    }
-    return null;
-  }
-
   render() {
     const { result } = this.state;
+    // eslint-disable-next-line react/prop-types
+    const { t } = this.props;
+
     return (
       <Row style={{ padding: '15px', height: '100%' }}>
         <Col span={12}>
@@ -104,12 +101,8 @@ class Base64 extends React.Component {
           />
         </Col>
         <Col span={11} offset={1}>
-          <Button
-            style={{ marginBottom: '5px' }}
-            icon={<CopyOutlined />}
-            onClick={this.Copy}
-          >
-            Copy
+          <Button icon={<CopyOutlined />} onClick={() => Copy(result)}>
+            {t('commons.buttons.copy')}
           </Button>
           <TextArea rows={23} value={result} className="textarea-input" />
         </Col>
@@ -118,4 +111,4 @@ class Base64 extends React.Component {
   }
 }
 
-export default Base64;
+export default withTranslation()(Base64);

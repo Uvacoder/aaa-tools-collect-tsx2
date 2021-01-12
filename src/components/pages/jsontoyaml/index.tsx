@@ -1,10 +1,11 @@
 import React from 'react';
 import { Input, Row, Col, Select, Button } from 'antd';
 import { CopyOutlined } from '@ant-design/icons';
-import { clipboard } from 'electron';
 import yml from 'js-yaml';
 import Prism from 'prismjs';
-import CodeView from '../commons/codeView';
+import { withTranslation } from 'react-i18next';
+import CodeView from '../../commons/codeView';
+import Copy from '../../../utils/copy';
 
 const { TextArea } = Input;
 
@@ -17,7 +18,6 @@ class JSONtoYaml extends React.Component {
     };
 
     this.onTextAreaChange = this.onTextAreaChange.bind(this);
-    this.Copy = this.Copy.bind(this);
     this.parseJson = this.parseJson.bind(this);
   }
 
@@ -44,13 +44,6 @@ class JSONtoYaml extends React.Component {
     });
   }
 
-  Copy(event) {
-    if (this.state.yaml) {
-      clipboard.writeText(this.state.yaml);
-    }
-    return null;
-  }
-
   // eslint-disable-next-line class-methods-use-this
   prettyYAML(value) {
     return {
@@ -60,6 +53,8 @@ class JSONtoYaml extends React.Component {
 
   render() {
     const { yaml } = this.state;
+    // eslint-disable-next-line react/prop-types
+    const { t } = this.props;
     return (
       <Row style={{ padding: '15px', height: '100%' }}>
         <Col span={12}>
@@ -70,8 +65,8 @@ class JSONtoYaml extends React.Component {
           />
         </Col>
         <Col span={11} offset={1}>
-          <Button icon={<CopyOutlined />} onClick={this.Copy}>
-            Copy
+          <Button icon={<CopyOutlined />} onClick={() => Copy(yaml)}>
+            {t('commons.buttons.copy')}
           </Button>
           <CodeView code={this.prettyYAML(yaml)} language="yaml" />
         </Col>
@@ -80,4 +75,4 @@ class JSONtoYaml extends React.Component {
   }
 }
 
-export default JSONtoYaml;
+export default withTranslation()(JSONtoYaml);

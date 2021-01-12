@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { Layout, Menu } from 'antd';
 import { Link } from 'react-router-dom';
@@ -7,7 +8,9 @@ import {
   LinkOutlined,
   DiffOutlined,
   QuestionCircleFilled,
+  SettingOutlined,
 } from '@ant-design/icons';
+import { withTranslation } from 'react-i18next';
 import JwtIcon from '../../icons/jwtIcon';
 import BracketsIcon from '../../icons/brackets';
 import Base64Icon from '../../icons/base64';
@@ -18,7 +21,7 @@ class Sidebar extends React.Component {
   componentDidMount() {}
 
   render() {
-    const { theme } = this.props;
+    const { theme, t } = this.props;
 
     return (
       <Sider
@@ -80,9 +83,14 @@ class Sidebar extends React.Component {
               Diff Viewer
             </Link>
           </Menu.Item>
-          <Menu.Item key="10" icon={<QuestionCircleFilled />}>
+          <Menu.Item key="10" icon={<SettingOutlined />}>
+            <Link to="/settings" style={{ fontSize: '0.9em' }}>
+              {t('app.sidebar.settings')}
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="11" icon={<QuestionCircleFilled />}>
             <Link to="/about" style={{ fontSize: '0.9em' }}>
-              About
+              {t('app.sidebar.about')}
             </Link>
           </Menu.Item>
         </Menu>
@@ -91,4 +99,4 @@ class Sidebar extends React.Component {
   }
 }
 
-export default Sidebar;
+export default withTranslation()(Sidebar);

@@ -57,6 +57,16 @@ module.exports = (api) => {
       require('@babel/plugin-proposal-json-strings'),
 
       ...(development ? developmentPlugins : productionPlugins),
+
+      [
+        'prismjs',
+        {
+          languages: ['json', 'yaml'],
+          plugins: [],
+          theme: 'okaidia',
+          css: true,
+        },
+      ],
     ],
   };
 };

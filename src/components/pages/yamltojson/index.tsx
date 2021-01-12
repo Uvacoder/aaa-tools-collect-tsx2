@@ -1,27 +1,29 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { Input, Row, Col, Select, Button } from 'antd';
 import { CopyOutlined } from '@ant-design/icons';
-import { clipboard } from 'electron';
-import URL from 'url';
+import { withTranslation } from 'react-i18next';
+import yml from 'js-yaml';
 import Prism from 'prismjs';
-import CodeView from '../commons/codeView';
+import Copy from '../../../utils/copy';
+import CodeView from '../../commons/codeView';
 
 const { TextArea } = Input;
 const { Option } = Select;
 
-class JSONFormatterValidator extends React.Component {
+class JSONtoYaml extends React.Component {
   constructor(props: any) {
     super(props);
 
     this.state = {
+      json: '',
+      jsonParsed: '',
       space: 2,
-      dataDecode: '',
-      data: null,
     };
 
     this.onTextAreaChange = this.onTextAreaChange.bind(this);
     this.onSelectChange = this.onSelectChange.bind(this);
-    this.Copy = this.Copy.bind(this);
+
     this.parseJson = this.parseJson.bind(this);
   }
 
@@ -31,27 +33,24 @@ class JSONFormatterValidator extends React.Component {
 
   onTextAreaChange(event: any) {
     try {
-      const data = URL.parse(event.target.value, true);
-
-      this.setState((state, props) => {
-        this.parseJson(data, state.space);
-
-        return {
-          data,
-        };
-      });
-    } catch (error) {
-      if (event.target.value) {
+      const json = yml.load(event.target.value);
+      if (json) {
+        const { space } = this.state;
+        this.parseJson(json, space);
         this.setState({
-          data: null,
-          dataDecode: error.message,
+          json,
         });
       } else {
         this.setState({
-          data: null,
-          dataDecode: '',
+          jsonParsed: '',
+          json: '',
         });
       }
+    } catch (error) {
+      this.setState({
+        jsonParsed: '',
+        json: '',
+      });
     }
   }
 
@@ -59,25 +58,17 @@ class JSONFormatterValidator extends React.Component {
     this.setState((state, prop) => {
       const space = parseInt(value, 10);
 
-      this.parseJson(state.data, space);
+      this.parseJson(state.json, space);
 
       return { space };
     });
   }
 
   parseJson(value: string, space: number) {
-    const dataDecode = JSON.stringify(value, null, space);
-
+    const jsonParsed = JSON.stringify(value, null, space);
     this.setState({
-      dataDecode,
+      jsonParsed,
     });
-  }
-
-  Copy(event) {
-    if (this.state.dataDecode) {
-      clipboard.writeText(this.state.dataDecode);
-    }
-    return null;
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -88,12 +79,13 @@ class JSONFormatterValidator extends React.Component {
   }
 
   render() {
-    const { dataDecode } = this.state;
+    const { jsonParsed } = this.state;
+    const { t } = this.props;
     return (
       <Row style={{ padding: '15px', height: '100%' }}>
         <Col span={12}>
           <TextArea
-            rows={23}
+            rows={29}
             onChange={this.onTextAreaChange}
             className="textarea-input"
           />
@@ -104,18 +96,18 @@ class JSONFormatterValidator extends React.Component {
             style={{ width: 120, paddingRight: '5px' }}
             onChange={this.onSelectChange}
           >
-            <Option value="2">2 spaces</Option>
-            <Option value="4">4 spaces</Option>
-            <Option value="6">6 spaces</Option>
+            <Option value="2">2 {t('commons.selects.spaces')}</Option>
+            <Option value="4">4 {t('commons.selects.spaces')}</Option>
+            <Option value="6">6 {t('commons.selects.spaces')}</Option>
           </Select>
-          <Button icon={<CopyOutlined />} onClick={this.Copy}>
-            Copy
+          <Button icon={<CopyOutlined />} onClick={() => Copy(jsonParsed)}>
+            {t('commons.buttons.copy')}
           </Button>
-          <CodeView code={this.prettyJSON(dataDecode)} language="json" />
+          <CodeView code={this.prettyJSON(jsonParsed)} language="json" />
         </Col>
       </Row>
     );
   }
 }
 
-export default JSONFormatterValidator;
+export default withTranslation()(JSONtoYaml);

@@ -23,6 +23,11 @@ A Must Necessary Developer App.
 - Diff viewer
 - [Request a Feature](https://github.com/AndresMorelos/devapp/issues/new)
 
+## Translations:
+
+- Spanish: ✅
+- English: ✅
+- [Contribute](https://github.com/AndresMorelos/developer-toolbox/wiki/How-to-contribute-to-translations)
 
 ## AutoUpdates:
 

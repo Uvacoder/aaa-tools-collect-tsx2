@@ -1,31 +1,48 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // Small helpers you might want to keep
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Layout, Row, Col } from 'antd';
-import PackageJson from './package.json';
+import UserSettings from './services/settings';
 
 // eslint-disable-next-line import/extensions
 import './helpers/external_links.ts';
 import SwitchTheme from './components/SwitchTheme';
 import Sidebar from './components/Sidebar';
-import JSONFormatterValidator from './components/jsonformattervalidator';
-import JWTDecoder from './components/jwtdecoder';
-import UnixTimeConverter from './components/unixtimeconverter';
-import SSLInformation from './components/sslinformation';
-import Base64 from './components/base64';
-import URLDecoder from './components/urldecoder';
-import JSONtoYaml from './components/jsontoyaml';
-import YamlToJSON from './components/yamltojson';
-import DiffViewer from './components/diffViewer';
-import AboutPage from './components/about';
+import JSONFormatterValidator from './components/pages/jsonformattervalidator';
+import JWTDecoder from './components/pages/jwtdecoder';
+import UnixTimeConverter from './components/pages/unixtimeconverter';
+import SSLInformation from './components/pages/sslinformation';
+import Base64 from './components/pages/base64';
+import URLDecoder from './components/pages/urldecoder';
+import JSONtoYaml from './components/pages/jsontoyaml';
+import YamlToJSON from './components/pages/yamltojson';
+import DiffViewer from './components/pages/diffViewer';
+import AboutPage from './components/pages/about';
+import SettingsPage from './components/pages/settings';
 
 const { Content, Header } = Layout;
 
 export default function App() {
-  const [theme = 'dark', setTheme] = useState();
+  const userTheme = UserSettings.Get('settings.theme')
+    ? UserSettings.Get('settings.theme')
+    : 'dark';
 
-  const changeTheme = (value) => {
-    setTheme(value ? 'dark' : 'light');
+  const userLang = UserSettings.Get('settings.lang')
+    ? UserSettings.Get('settings.lang')
+    : 'en';
+
+  const [theme = userTheme, setTheme] = useState();
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(userLang);
+  }, []);
+
+  const changeTheme = (value: boolean) => {
+    const selectedTheme: string = value ? 'dark' : 'light';
+    setTheme(selectedTheme);
+    UserSettings.Save('settings.theme', selectedTheme);
   };
 
   return (
@@ -39,10 +56,10 @@ export default function App() {
           >
             <Row>
               <Col offset={1}>
-                <h3 className={`color-${theme}`}>Developer ToolBox</h3>
+                <h3 className={`color-${theme}`}>{t('app.name')}</h3>
               </Col>
-              <Col span={6} offset={10}>
-                <SwitchTheme onChange={changeTheme} />
+              <Col span={6} offset={5}>
+                <SwitchTheme defaultTheme={theme} onChange={changeTheme} />
               </Col>
             </Row>
           </Header>
@@ -64,6 +81,7 @@ export default function App() {
                 component={UnixTimeConverter}
               />
               <Route path="/about" component={AboutPage} />
+              <Route path="/settings" component={SettingsPage} />
               <Route path="/" component={JSONFormatterValidator} />
             </Switch>
           </Content>

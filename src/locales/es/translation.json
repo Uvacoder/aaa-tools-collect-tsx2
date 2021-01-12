@@ -1,0 +1,30 @@
+{
+  "app": {
+    "name": "Caja de herramienta para desarrolladores",
+    "about": {
+      "report": {
+        "bug": "Reportar un error"
+      },
+      "created": "Creado con ♥ por"
+    },
+    "sidebar": {
+      "about": "Acerca de",
+      "settings": "Configuraciones"
+    },
+    "languages": {
+      "es": "Español",
+      "en": "Inglés"
+    },
+    "settings": {
+      "language": "Lenguaje"
+    }
+  },
+  "commons": {
+    "buttons": {
+      "copy": "Copiar"
+    },
+    "selects": {
+      "spaces": "espacios"
+    }
+  }
+}
