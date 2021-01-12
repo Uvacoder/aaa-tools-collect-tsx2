@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { Input, Row, Col, Select, Button } from 'antd';
 import { CopyOutlined } from '@ant-design/icons';
@@ -83,6 +84,7 @@ class URLEncoder extends React.Component {
 
   render() {
     const { dataDecode } = this.state;
+    const { t } = this.props;
     return (
       <Row style={{ padding: '15px', height: '100%' }}>
         <Col span={12}>
