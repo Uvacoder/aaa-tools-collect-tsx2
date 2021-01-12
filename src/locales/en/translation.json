@@ -1,0 +1,30 @@
+{
+  "app": {
+    "name": "Developer Toolbox",
+    "about": {
+      "report": {
+        "bug": "Report a bug"
+      },
+      "created": "Created with ♥ by"
+    },
+    "sidebar": {
+      "about": "About",
+      "settings": "Settings"
+    },
+    "languages": {
+      "es": "Spanish",
+      "en": "English"
+    },
+    "settings": {
+      "language": "Language"
+    }
+  },
+  "commons": {
+    "buttons": {
+      "copy": "Copy"
+    },
+    "selects": {
+      "spaces": "spaces"
+    }
+  }
+}

@@ -2,8 +2,9 @@ import React from 'react';
 import { Input, Row, Col, Button } from 'antd';
 import { CopyOutlined } from '@ant-design/icons';
 import * as jwt from 'jsonwebtoken';
-import { clipboard } from 'electron';
+import { withTranslation } from 'react-i18next';
 import Prism from 'prismjs';
+import Copy from '../../../utils/copy';
 import 'prismjs/components/prism-json';
 
 const { TextArea } = Input;
@@ -18,7 +19,6 @@ class JWTDecoder extends React.Component {
     };
 
     this.onTextAreaChange = this.onTextAreaChange.bind(this);
-    this.Copy = this.Copy.bind(this);
   }
 
   componentDidMount() {
@@ -54,26 +54,6 @@ class JWTDecoder extends React.Component {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  Copy(event: any) {
-    const dataShown = event.target.parentNode.getAttribute('data-shown');
-    let dataToCopy = '';
-    if (dataShown) {
-      const { payload, headers } = this.state;
-      switch (dataShown) {
-        case 'headers':
-          dataToCopy = headers;
-          break;
-        case 'payload':
-          dataToCopy = payload;
-          break;
-        default:
-          break;
-      }
-      clipboard.writeText(dataToCopy);
-    }
-  }
-
-  // eslint-disable-next-line class-methods-use-this
   prettyJSON(value) {
     return {
       __html: Prism.highlight(value, Prism.languages.json, 'json'),
@@ -82,6 +62,8 @@ class JWTDecoder extends React.Component {
 
   render() {
     const { payload, headers } = this.state;
+    // eslint-disable-next-line react/prop-types
+    const { t } = this.props;
 
     return (
       <Row style={{ padding: '15px', height: '100%' }}>
@@ -95,12 +77,9 @@ class JWTDecoder extends React.Component {
         <Col span={11} offset={1}>
           <h4>
             Headers{' '}
-            <Button
-              data-shown="headers"
-              icon={<CopyOutlined />}
-              onClick={this.Copy}
-            >
-              Copy
+            <Button icon={<CopyOutlined />} onClick={() => Copy(headers)}>
+              {' '}
+              {t('commons.buttons.copy')}{' '}
             </Button>
           </h4>
 
@@ -111,12 +90,8 @@ class JWTDecoder extends React.Component {
           />
           <h4>
             Payload{' '}
-            <Button
-              data-shown="payload"
-              icon={<CopyOutlined />}
-              onClick={this.Copy}
-            >
-              Copy
+            <Button icon={<CopyOutlined />} onClick={() => Copy(payload)}>
+              {t('commons.buttons.copy')}
             </Button>
           </h4>
 
@@ -131,4 +106,4 @@ class JWTDecoder extends React.Component {
   }
 }
 
-export default JWTDecoder;
+export default withTranslation()(JWTDecoder);

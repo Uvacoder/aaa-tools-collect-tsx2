@@ -1,3 +1,4 @@
+/* eslint-disable no-bitwise */
 import React from 'react';
 import { InputNumber, Row, Col, Switch } from 'antd';
 
@@ -16,7 +17,8 @@ class UnixTimeConverter extends React.Component {
   }
 
   componentDidMount() {
-    this.setDate(this.state.date, this.state.format);
+    const { date, format } = this.state;
+    this.setDate(date, format);
   }
 
   onInputChange(value: string | number | undefined) {
@@ -24,7 +26,8 @@ class UnixTimeConverter extends React.Component {
       ![undefined, null].includes(value) &&
       ['string', 'number'].includes(typeof value)
     ) {
-      this.setDate(value, this.state.format);
+      const { format } = this.state;
+      this.setDate(value, format);
     }
   }
 
@@ -56,7 +59,9 @@ class UnixTimeConverter extends React.Component {
         date: value,
         dateParsed,
       });
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   // eslint-disable-next-line class-methods-use-this

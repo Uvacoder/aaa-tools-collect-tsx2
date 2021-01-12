@@ -1,15 +1,18 @@
 import React from 'react';
 import { Button } from 'antd';
-import PackageJson from '../../package.json';
+import { withTranslation } from 'react-i18next';
+import PackageJson from '../../../package.json';
 
 class AboutPage extends React.Component {
   componentDidMount() {}
 
   render() {
+    // eslint-disable-next-line react/prop-types
+    const { t } = this.props;
+
     return (
       <div style={{ textAlign: 'center' }}>
-        {' '}
-        Created with ♥ by{' '}
+        {`${t('app.about.created')} `}
         <a className="js-external-link" href="https://andresmorelos.dev">
           Andres Morelos
         </a>
@@ -17,13 +20,13 @@ class AboutPage extends React.Component {
         <a className="js-external-link" href="https://github.com/AndresMorelos">
           Github Profile
         </a>
-        <br /> <br /> <br />{' '}
+        <br /> <br /> <br />
         <Button
           danger
           className="js-external-link"
           href="https://github.com/AndresMorelos/developer-toolbox/issues/new/choose"
         >
-          Report a bug
+          {t('app.about.report.bug')}
         </Button>
         <br /> <br /> Version {PackageJson.version}
       </div>
@@ -31,4 +34,4 @@ class AboutPage extends React.Component {
   }
 }
 
-export default AboutPage;
+export default withTranslation()(AboutPage);

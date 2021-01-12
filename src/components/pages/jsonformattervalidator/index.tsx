@@ -1,27 +1,26 @@
 import React from 'react';
 import { Input, Row, Col, Select, Button } from 'antd';
 import { CopyOutlined } from '@ant-design/icons';
-import { clipboard } from 'electron';
-import yml from 'js-yaml';
 import Prism from 'prismjs';
-import CodeView from '../commons/codeView';
+import { withTranslation } from 'react-i18next';
+import CodeView from '../../commons/codeView';
+import Copy from '../../../utils/copy';
 
 const { TextArea } = Input;
 const { Option } = Select;
 
-class JSONtoYaml extends React.Component {
+class JSONFormatterValidator extends React.Component {
   constructor(props: any) {
     super(props);
 
     this.state = {
-      json: '',
+      jsonValue: null,
       jsonParsed: '',
       space: 2,
     };
 
     this.onTextAreaChange = this.onTextAreaChange.bind(this);
     this.onSelectChange = this.onSelectChange.bind(this);
-    this.Copy = this.Copy.bind(this);
     this.parseJson = this.parseJson.bind(this);
   }
 
@@ -31,23 +30,27 @@ class JSONtoYaml extends React.Component {
 
   onTextAreaChange(event: any) {
     try {
-      const json = yml.load(event.target.value);
-      if (json) {
-        this.parseJson(json, this.state.space);
+      const jsonValue = JSON.parse(event.target.value);
+
+      this.setState((state, props) => {
+        this.parseJson(jsonValue, state.space);
+
+        return {
+          jsonValue,
+        };
+      });
+    } catch (error) {
+      if (event.target.value) {
         this.setState({
-          json,
+          jsonValue: null,
+          jsonParsed: error.message,
         });
       } else {
         this.setState({
+          jsonValue: null,
           jsonParsed: '',
-          json: '',
         });
       }
-    } catch (error) {
-      this.setState({
-        jsonParsed: '',
-        json: '',
-      });
     }
   }
 
@@ -55,24 +58,20 @@ class JSONtoYaml extends React.Component {
     this.setState((state, prop) => {
       const space = parseInt(value, 10);
 
-      this.parseJson(state.json, space);
+      this.parseJson(state.jsonValue, space);
 
       return { space };
     });
   }
 
   parseJson(value: string, space: number) {
-    const jsonParsed = JSON.stringify(value, null, space);
-    this.setState({
-      jsonParsed,
-    });
-  }
+    if (value) {
+      const jsonParsed = JSON.stringify(value, null, space);
 
-  Copy(event) {
-    if (this.state.jsonParsed) {
-      clipboard.writeText(this.state.jsonParsed);
+      this.setState({
+        jsonParsed,
+      });
     }
-    return null;
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -84,11 +83,13 @@ class JSONtoYaml extends React.Component {
 
   render() {
     const { jsonParsed } = this.state;
+    // eslint-disable-next-line react/prop-types
+    const { t } = this.props;
     return (
       <Row style={{ padding: '15px', height: '100%' }}>
         <Col span={12}>
           <TextArea
-            rows={29}
+            rows={23}
             onChange={this.onTextAreaChange}
             className="textarea-input"
           />
@@ -99,12 +100,12 @@ class JSONtoYaml extends React.Component {
             style={{ width: 120, paddingRight: '5px' }}
             onChange={this.onSelectChange}
           >
-            <Option value="2">2 spaces</Option>
-            <Option value="4">4 spaces</Option>
-            <Option value="6">6 spaces</Option>
+            <Option value="2">2 {t('commons.selects.spaces')}</Option>
+            <Option value="4">4 {t('commons.selects.spaces')}</Option>
+            <Option value="6">6 {t('commons.selects.spaces')}</Option>
           </Select>
-          <Button icon={<CopyOutlined />} onClick={this.Copy}>
-            Copy
+          <Button icon={<CopyOutlined />} onClick={() => Copy(jsonParsed)}>
+            {t('commons.buttons.copy')}
           </Button>
           <CodeView code={this.prettyJSON(jsonParsed)} language="json" />
         </Col>
@@ -113,4 +114,4 @@ class JSONtoYaml extends React.Component {
   }
 }
 
-export default JSONtoYaml;
+export default withTranslation()(JSONFormatterValidator);

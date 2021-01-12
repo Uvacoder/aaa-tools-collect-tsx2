@@ -1,26 +1,28 @@
 import React from 'react';
 import { Input, Row, Col, Select, Button } from 'antd';
 import { CopyOutlined } from '@ant-design/icons';
-import { clipboard } from 'electron';
+import { withTranslation } from 'react-i18next';
+import URL from 'url';
 import Prism from 'prismjs';
-import CodeView from '../commons/codeView';
+import Copy from '../../../utils/copy';
+import CodeView from '../../commons/codeView';
 
 const { TextArea } = Input;
 const { Option } = Select;
 
-class JSONFormatterValidator extends React.Component {
+class URLEncoder extends React.Component {
   constructor(props: any) {
     super(props);
 
     this.state = {
-      jsonValue: null,
-      jsonParsed: '',
       space: 2,
+      dataDecode: '',
+      data: null,
     };
 
     this.onTextAreaChange = this.onTextAreaChange.bind(this);
     this.onSelectChange = this.onSelectChange.bind(this);
-    this.Copy = this.Copy.bind(this);
+
     this.parseJson = this.parseJson.bind(this);
   }
 
@@ -30,25 +32,25 @@ class JSONFormatterValidator extends React.Component {
 
   onTextAreaChange(event: any) {
     try {
-      const jsonValue = JSON.parse(event.target.value);
+      const data = URL.parse(event.target.value, true);
 
       this.setState((state, props) => {
-        this.parseJson(jsonValue, state.space);
+        this.parseJson(data, state.space);
 
         return {
-          jsonValue,
+          data,
         };
       });
     } catch (error) {
       if (event.target.value) {
         this.setState({
-          jsonValue: null,
-          jsonParsed: error.message,
+          data: null,
+          dataDecode: error.message,
         });
       } else {
         this.setState({
-          jsonValue: null,
-          jsonParsed: '',
+          data: null,
+          dataDecode: '',
         });
       }
     }
@@ -58,25 +60,18 @@ class JSONFormatterValidator extends React.Component {
     this.setState((state, prop) => {
       const space = parseInt(value, 10);
 
-      this.parseJson(state.jsonValue, space);
+      this.parseJson(state.data, space);
 
       return { space };
     });
   }
 
   parseJson(value: string, space: number) {
-    const jsonParsed = JSON.stringify(value, null, space);
+    const dataDecode = JSON.stringify(value, null, space);
 
     this.setState({
-      jsonParsed,
+      dataDecode,
     });
-  }
-
-  Copy(event) {
-    if (this.state.jsonParsed) {
-      clipboard.writeText(this.state.jsonParsed);
-    }
-    return null;
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -87,7 +82,7 @@ class JSONFormatterValidator extends React.Component {
   }
 
   render() {
-    const { jsonParsed } = this.state;
+    const { dataDecode } = this.state;
     return (
       <Row style={{ padding: '15px', height: '100%' }}>
         <Col span={12}>
@@ -103,18 +98,18 @@ class JSONFormatterValidator extends React.Component {
             style={{ width: 120, paddingRight: '5px' }}
             onChange={this.onSelectChange}
           >
-            <Option value="2">2 spaces</Option>
-            <Option value="4">4 spaces</Option>
-            <Option value="6">6 spaces</Option>
+            <Option value="2">2 {t('commons.selects.spaces')}</Option>
+            <Option value="4">4 {t('commons.selects.spaces')}</Option>
+            <Option value="6">6 {t('commons.selects.spaces')}</Option>
           </Select>
-          <Button icon={<CopyOutlined />} onClick={this.Copy}>
-            Copy
+          <Button icon={<CopyOutlined />} onClick={() => Copy(dataDecode)}>
+            {t('commons.buttons.copy')}
           </Button>
-          <CodeView code={this.prettyJSON(jsonParsed)} language="json" />
+          <CodeView code={this.prettyJSON(dataDecode)} language="json" />
         </Col>
       </Row>
     );
   }
 }
 
-export default JSONFormatterValidator;
+export default withTranslation()(URLEncoder);
