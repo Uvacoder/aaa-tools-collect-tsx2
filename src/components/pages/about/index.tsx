@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'antd';
+import { Button, Space } from 'antd';
 import { withTranslation } from 'react-i18next';
 import PackageJson from '../../../package.json';
 
@@ -21,13 +21,22 @@ class AboutPage extends React.Component {
           Github Profile
         </a>
         <br /> <br /> <br />
-        <Button
-          danger
-          className="js-external-link"
-          href="https://github.com/AndresMorelos/developer-toolbox/issues/new/choose"
-        >
-          {t('app.about.report.bug')}
-        </Button>
+        <Space>
+          <Button
+            danger
+            className="js-external-link"
+            href="https://github.com/AndresMorelos/developer-toolbox/issues/new/choose"
+          >
+            {t('app.about.report.bug')}
+          </Button>
+          <Button
+            type="primary"
+            className="js-external-link"
+            href="https://paypal.me/AndresMorelosCo/5USD"
+          >
+            {t('app.about.donation')}
+          </Button>
+        </Space>
         <br /> <br /> Version {PackageJson.version}
       </div>
     );

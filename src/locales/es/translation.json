@@ -5,11 +5,15 @@
       "report": {
         "bug": "Reportar un error"
       },
-      "created": "Creado con ♥ por"
+      "created": "Creado con ♥ por",
+      "donation": "Realizar una donación ♥"
     },
     "sidebar": {
       "about": "Acerca de",
-      "settings": "Configuraciones"
+      "settings": "Configuraciones",
+      "remove-duplicate-lines": "Eliminar Lineas Duplicadas",
+      "yaml-to-json": "YAML a JSON",
+      "json-to-yaml": "JSON a YAML"
     },
     "languages": {
       "es": "Español",
