@@ -8,7 +8,7 @@
 
 A Must Necessary Developer App.
 
-![Developer Utils App](./.erb/img/latest-feature.gif)
+![Developer Utils App](./.erb/img/dev-toolbox.png)
 
 ## Features
 
