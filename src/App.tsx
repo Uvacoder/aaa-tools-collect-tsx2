@@ -20,6 +20,7 @@ import YamlToJSON from './components/pages/yamltojson';
 import DiffViewer from './components/pages/diffViewer';
 import AboutPage from './components/pages/about';
 import SettingsPage from './components/pages/settings';
+import SpreadSheetComparison from './components/pages/spreadsheetComparison';
 
 const { Content, Header } = Layout;
 
@@ -67,6 +68,10 @@ export default function App() {
             <Switch>
               <Route path="/json-to-yaml" component={JSONtoYaml} />
               <Route path="/diff" component={DiffViewer} />
+              <Route
+                path="/spreadsheet-diff"
+                component={SpreadSheetComparison}
+              />
               <Route path="/yaml-to-json" component={YamlToJSON} />
               <Route path="/url-decoder" component={URLDecoder} />
               <Route

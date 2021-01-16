@@ -83,12 +83,17 @@ class Sidebar extends React.Component {
               Diff Viewer
             </Link>
           </Menu.Item>
-          <Menu.Item key="10" icon={<SettingOutlined />}>
+          <Menu.Item key="10" icon={<DiffOutlined />}>
+            <Link to="/spreadsheet-diff" style={{ fontSize: '0.9em' }}>
+              SpreadSheet Comparison
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="11" icon={<SettingOutlined />}>
             <Link to="/settings" style={{ fontSize: '0.9em' }}>
               {t('app.sidebar.settings')}
             </Link>
           </Menu.Item>
-          <Menu.Item key="11" icon={<QuestionCircleFilled />}>
+          <Menu.Item key="12" icon={<QuestionCircleFilled />}>
             <Link to="/about" style={{ fontSize: '0.9em' }}>
               {t('app.sidebar.about')}
             </Link>

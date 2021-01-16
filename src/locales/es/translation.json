@@ -26,5 +26,12 @@
     "selects": {
       "spaces": "espacios"
     }
+  },
+  "pages": {
+    "spreadsheetcomparison": {
+      "uploads": {
+        "file": "Cargar Archivo"
+      }
+    }
   }
 }
