@@ -70,12 +70,12 @@ class Sidebar extends React.Component {
           </Menu.Item>
           <Menu.Item key="7" icon={<BracketsIcon fill="white" />}>
             <Link to="/json-to-yaml" style={{ fontSize: '0.9em' }}>
-              JSON to YAML
+              {t('app.sidebar.json-to-yaml')}
             </Link>
           </Menu.Item>
           <Menu.Item key="8" icon={<BracketsIcon fill="white" />}>
             <Link to="/yaml-to-json" style={{ fontSize: '0.9em' }}>
-              YAML to JSON
+              {t('app.sidebar.yaml-to-json')}
             </Link>
           </Menu.Item>
           <Menu.Item key="9" icon={<DiffOutlined />}>
@@ -83,12 +83,17 @@ class Sidebar extends React.Component {
               Diff Viewer
             </Link>
           </Menu.Item>
-          <Menu.Item key="10" icon={<SettingOutlined />}>
+          <Menu.Item key="10" icon={<DiffOutlined />}>
+            <Link to="/remove-dup-lines" style={{ fontSize: '0.9em' }}>
+              {t('app.sidebar.remove-duplicate-lines')}
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="11" icon={<SettingOutlined />}>
             <Link to="/settings" style={{ fontSize: '0.9em' }}>
               {t('app.sidebar.settings')}
             </Link>
           </Menu.Item>
-          <Menu.Item key="11" icon={<QuestionCircleFilled />}>
+          <Menu.Item key="12" icon={<QuestionCircleFilled />}>
             <Link to="/about" style={{ fontSize: '0.9em' }}>
               {t('app.sidebar.about')}
             </Link>

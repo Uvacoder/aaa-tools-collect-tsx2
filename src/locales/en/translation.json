@@ -5,11 +5,15 @@
       "report": {
         "bug": "Report a bug"
       },
-      "created": "Created with ♥ by"
+      "created": "Created with ♥ by",
+      "donation": "Make a donation ♥"
     },
     "sidebar": {
       "about": "About",
-      "settings": "Settings"
+      "settings": "Settings",
+      "remove-duplicate-lines": "Remove duplicated Lines",
+      "yaml-to-json": "YAML to JSON",
+      "json-to-yaml": "JSON to YAML"
     },
     "languages": {
       "es": "Spanish",
