@@ -1,15 +1,22 @@
+/* eslint-disable react/no-danger */
 import React from 'react';
 import 'prismjs/components/prism-yaml';
 import 'prismjs/components/prism-json';
 
-function CodeView(props) {
+interface Props {
+  code: { __html: string } | undefined;
+  language: string;
+}
+
+const CodeView = (props: Props) => {
+  const { code, language } = props;
   return (
     <pre
       style={{ border: '1px solid' }}
-      className={`language-${props.language} pre-response`}
-      dangerouslySetInnerHTML={props.code}
+      className={`language-${language} pre-response`}
+      dangerouslySetInnerHTML={code}
     />
   );
-}
+};
 
 export default CodeView;

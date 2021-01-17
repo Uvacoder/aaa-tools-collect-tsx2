@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { Input, Row, Col, Select, Button } from 'antd';
 import { CopyOutlined } from '@ant-design/icons';
@@ -11,7 +10,17 @@ import CodeView from '../../commons/codeView';
 const { TextArea } = Input;
 const { Option } = Select;
 
-class JSONtoYaml extends React.Component {
+interface Props {
+  t(code: string): string;
+}
+
+interface State {
+  space: number;
+  json: string | undefined;
+  jsonParsed: string | undefined;
+}
+
+class JSONtoYaml extends React.Component<Props, State> {
   constructor(props: any) {
     super(props);
 
@@ -64,7 +73,7 @@ class JSONtoYaml extends React.Component {
     });
   }
 
-  parseJson(value: string, space: number) {
+  parseJson(value: string | undefined, space: number) {
     const jsonParsed = JSON.stringify(value, null, space);
     this.setState({
       jsonParsed,
@@ -72,10 +81,14 @@ class JSONtoYaml extends React.Component {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  prettyJSON(value) {
-    return {
-      __html: Prism.highlight(value, Prism.languages.json, 'json'),
-    };
+  prettyJSON(value: string | undefined) {
+    if (value) {
+      return {
+        __html: Prism.highlight(value, Prism.languages.json, 'json'),
+      };
+    }
+
+    return undefined;
   }
 
   render() {

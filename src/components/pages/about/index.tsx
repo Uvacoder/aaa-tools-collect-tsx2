@@ -3,11 +3,13 @@ import { Button, Space } from 'antd';
 import { withTranslation } from 'react-i18next';
 import PackageJson from '../../../package.json';
 
-class AboutPage extends React.Component {
+interface Props {
+  t(code: string): string;
+}
+class AboutPage extends React.Component<Props> {
   componentDidMount() {}
 
   render() {
-    // eslint-disable-next-line react/prop-types
     const { t } = this.props;
 
     return (

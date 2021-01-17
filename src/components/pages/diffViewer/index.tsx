@@ -4,9 +4,13 @@ import ReactDiffViewer from 'react-diff-viewer';
 
 const { TextArea } = Input;
 const { Panel } = Collapse;
-
-class Diffviewer extends React.Component {
-  constructor(props: any) {
+interface State {
+  oldValue: string | undefined;
+  newValue: string | undefined;
+  expanded: string | string[];
+}
+class Diffviewer extends React.Component<null, State> {
+  constructor(props: null) {
     super(props);
 
     this.state = {
@@ -21,13 +25,13 @@ class Diffviewer extends React.Component {
 
   componentDidMount() {}
 
-  onTextAreaOldChange(event: any) {
+  onTextAreaOldChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     this.setState({
       oldValue: event.target.value,
     });
   }
 
-  onTextAreaNewChange(event: any) {
+  onTextAreaNewChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     this.setState({
       newValue: event.target.value,
     });

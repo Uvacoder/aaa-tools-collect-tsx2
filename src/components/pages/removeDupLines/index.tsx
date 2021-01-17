@@ -6,12 +6,20 @@ import Copy from '../../../utils/copy';
 
 const { TextArea } = Input;
 
-class RemoveDupLines extends React.Component {
-  constructor(props: any) {
+interface Props {
+  t(code: string): string;
+}
+
+interface State {
+  result: string | undefined;
+}
+
+class RemoveDupLines extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
-      result: null,
+      result: undefined,
     };
 
     this.onTextAreaChange = this.onTextAreaChange.bind(this);
@@ -19,7 +27,7 @@ class RemoveDupLines extends React.Component {
 
   componentDidMount() {}
 
-  onTextAreaChange(event: any) {
+  onTextAreaChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     try {
       const original = event.target.value;
 
@@ -42,7 +50,7 @@ class RemoveDupLines extends React.Component {
         });
       } else {
         this.setState({
-          result: null,
+          result: undefined,
         });
       }
     }
@@ -50,7 +58,6 @@ class RemoveDupLines extends React.Component {
 
   render() {
     const { result } = this.state;
-    // eslint-disable-next-line react/prop-types
     const { t } = this.props;
 
     return (

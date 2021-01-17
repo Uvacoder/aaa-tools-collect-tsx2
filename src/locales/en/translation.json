@@ -11,7 +11,7 @@
     "sidebar": {
       "about": "About",
       "settings": "Settings",
-      "remove-duplicate-lines": "Remove duplicated Lines",
+      "remove-duplicate-lines": "Remove duplicate lines",
       "yaml-to-json": "YAML to JSON",
       "json-to-yaml": "JSON to YAML"
     },

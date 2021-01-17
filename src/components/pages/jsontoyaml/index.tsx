@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Row, Col, Select, Button } from 'antd';
+import { Input, Row, Col, Button } from 'antd';
 import { CopyOutlined } from '@ant-design/icons';
 import yml from 'js-yaml';
 import Prism from 'prismjs';
@@ -9,8 +9,15 @@ import Copy from '../../../utils/copy';
 
 const { TextArea } = Input;
 
-class JSONtoYaml extends React.Component {
-  constructor(props: any) {
+interface Props {
+  t(code: string): string;
+}
+interface State {
+  yaml: string | undefined;
+}
+
+class JSONtoYaml extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -25,7 +32,7 @@ class JSONtoYaml extends React.Component {
     Prism.highlightAll();
   }
 
-  onTextAreaChange(event: any) {
+  onTextAreaChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     try {
       const jsonValue = JSON.parse(event.target.value);
       this.parseJson(jsonValue);
@@ -45,15 +52,19 @@ class JSONtoYaml extends React.Component {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  prettyYAML(value) {
-    return {
-      __html: Prism.highlight(value, Prism.languages.yaml, 'yaml'),
-    };
+  prettyYAML(value: string | undefined) {
+    if (value) {
+      return {
+        __html: Prism.highlight(value, Prism.languages.yaml, 'yaml'),
+      };
+    }
+
+    return undefined;
   }
 
   render() {
     const { yaml } = this.state;
-    // eslint-disable-next-line react/prop-types
+
     const { t } = this.props;
     return (
       <Row style={{ padding: '15px', height: '100%' }}>

@@ -1,9 +1,8 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { Input, Row, Col, Select, Button } from 'antd';
 import { CopyOutlined } from '@ant-design/icons';
 import { withTranslation } from 'react-i18next';
-import URL from 'url';
+import URL, { UrlWithParsedQuery } from 'url';
 import Prism from 'prismjs';
 import Copy from '../../../utils/copy';
 import CodeView from '../../commons/codeView';
@@ -11,14 +10,24 @@ import CodeView from '../../commons/codeView';
 const { TextArea } = Input;
 const { Option } = Select;
 
-class URLEncoder extends React.Component {
-  constructor(props: any) {
+interface Props {
+  t(code: string): string;
+}
+
+interface State {
+  space: number;
+  dataDecode: string | undefined;
+  data: string | undefined | UrlWithParsedQuery;
+}
+
+class URLEncoder extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
       space: 2,
       dataDecode: '',
-      data: null,
+      data: undefined,
     };
 
     this.onTextAreaChange = this.onTextAreaChange.bind(this);
@@ -31,7 +40,7 @@ class URLEncoder extends React.Component {
     Prism.highlightAll();
   }
 
-  onTextAreaChange(event: any) {
+  onTextAreaChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     try {
       const data = URL.parse(event.target.value, true);
 
@@ -45,12 +54,12 @@ class URLEncoder extends React.Component {
     } catch (error) {
       if (event.target.value) {
         this.setState({
-          data: null,
+          data: undefined,
           dataDecode: error.message,
         });
       } else {
         this.setState({
-          data: null,
+          data: undefined,
           dataDecode: '',
         });
       }
@@ -61,13 +70,15 @@ class URLEncoder extends React.Component {
     this.setState((state, prop) => {
       const space = parseInt(value, 10);
 
-      this.parseJson(state.data, space);
+      if (state.data) {
+        this.parseJson(state.data, space);
+      }
 
       return { space };
     });
   }
 
-  parseJson(value: string, space: number) {
+  parseJson(value: string | UrlWithParsedQuery, space: number) {
     const dataDecode = JSON.stringify(value, null, space);
 
     this.setState({
@@ -76,10 +87,13 @@ class URLEncoder extends React.Component {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  prettyJSON(value) {
-    return {
-      __html: Prism.highlight(value, Prism.languages.json, 'json'),
-    };
+  prettyJSON(value: string | undefined) {
+    if (value) {
+      return {
+        __html: Prism.highlight(value, Prism.languages.json, 'json'),
+      };
+    }
+    return undefined;
   }
 
   render() {
