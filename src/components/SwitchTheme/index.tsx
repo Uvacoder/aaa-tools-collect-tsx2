@@ -1,10 +1,13 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { Switch } from 'antd';
 import SunIcon from '../../icons/sun';
 import MoonIcon from '../../icons/moon';
 
-const SwitchTheme = (props) => {
+interface Props {
+  defaultTheme: string | unknown;
+  onChange(value: boolean): void;
+}
+const SwitchTheme = (props: Props) => {
   const { defaultTheme, onChange } = props;
 
   const checked = defaultTheme === 'dark';

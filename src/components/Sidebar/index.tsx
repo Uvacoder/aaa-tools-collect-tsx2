@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { Layout, Menu } from 'antd';
 import { Link } from 'react-router-dom';
@@ -17,7 +16,11 @@ import Base64Icon from '../../icons/base64';
 
 const { Sider } = Layout;
 
-class Sidebar extends React.Component {
+interface Props {
+  theme: string | unknown;
+  t(code: string): string;
+}
+class Sidebar extends React.Component<Props> {
   componentDidMount() {}
 
   render() {
