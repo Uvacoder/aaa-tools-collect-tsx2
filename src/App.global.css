@@ -10,7 +10,6 @@
   background-color: #fff !important;
 }
 
-
 .site-layout-background-dark {
   background-color: #001529 !important;
 }
@@ -18,7 +17,6 @@
 .content-layout-dark {
   background-color: rgb(0, 21, 41, 0.89);
 }
-
 
 .color-light {
   color: #001529 !important;
@@ -45,7 +43,6 @@
   .textarea-input {
     height: 85vh !important;
   }
-
 }
 
 @media (min-height: 768px) {
@@ -66,7 +63,6 @@
   .textarea-input {
     height: 89vh !important;
   }
-
 }
 
 @media (min-height: 992px) {
@@ -90,7 +86,6 @@
 }
 
 @media (min-height: 1200px) {
-
   .content-layout {
     margin: 17px 16px 0;
     overflow: initial;
@@ -111,7 +106,6 @@
 }
 
 @media (min-height: 1600px) {
-
   .content-layout {
     margin: 17px 16px 0;
     overflow: initial;
@@ -129,4 +123,11 @@
   .textarea-input {
     height: 90vh !important;
   }
+}
+
+.table-row-light {
+  background-color: #ffffff;
+}
+.table-row-dark {
+  background-color: #e6e6e6;
 }
