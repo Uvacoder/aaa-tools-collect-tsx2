@@ -124,3 +124,21 @@
     height: 90vh !important;
   }
 }
+
+.file-one {
+  background: #ffffff;
+  border-radius: 50%;
+  border: #001529 1px dotted;
+  width: 25px;
+  height: 25px;
+  margin-left: 5px;
+}
+
+.file-two {
+  background: #e6e6e6;
+  border-radius: 50%;
+  border: #001529 1px dotted;
+  width: 25px;
+  height: 25px;
+  margin-left: 5px;
+}

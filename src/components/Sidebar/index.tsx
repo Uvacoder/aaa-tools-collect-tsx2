@@ -85,7 +85,7 @@ class Sidebar extends React.Component {
           </Menu.Item>
           <Menu.Item key="10" icon={<DiffOutlined />}>
             <Link to="/spreadsheet-diff" style={{ fontSize: '0.9em' }}>
-              SpreadSheet Comparison
+              {t('app.sidebar.spreadsheetcomparison')}
             </Link>
           </Menu.Item>
           <Menu.Item key="11" icon={<SettingOutlined />}>

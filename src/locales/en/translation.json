@@ -9,7 +9,8 @@
     },
     "sidebar": {
       "about": "About",
-      "settings": "Settings"
+      "settings": "Settings",
+      "spreadsheetcomparison": "SpreadSheet Comparison"
     },
     "languages": {
       "es": "Spanish",
@@ -31,7 +32,9 @@
     "spreadsheetcomparison": {
       "uploads": {
         "file": "Upload File"
-      }
+      },
+      "compare": "Compare now",
+      "limitation": "At the moment you can only make comparisons for documents with the same name sheets"
     }
   }
 }

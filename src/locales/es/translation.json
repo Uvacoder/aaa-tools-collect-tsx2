@@ -9,7 +9,8 @@
     },
     "sidebar": {
       "about": "Acerca de",
-      "settings": "Configuraciones"
+      "settings": "Configuraciones",
+      "spreadsheetcomparison": "Comparar Excel"
     },
     "languages": {
       "es": "Español",
@@ -31,7 +32,9 @@
     "spreadsheetcomparison": {
       "uploads": {
         "file": "Cargar Archivo"
-      }
+      },
+      "compare": "Comparar",
+      "limitation": "Por el momento solo se puede realizar comparaciones para documentos con el mismo nombre en las hojas"
     }
   }
 }
