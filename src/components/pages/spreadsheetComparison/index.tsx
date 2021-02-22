@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-syntax */
 import React, { useState } from 'react';
-import { Button, Row, Col, Collapse, Upload, message } from 'antd';
+import { Button, Row, Col, Collapse, Upload, Table } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { withTranslation } from 'react-i18next';
 import { RcFile } from 'antd/lib/upload';
@@ -18,6 +18,9 @@ const SpreadSheetComparison = ({ t }: Props) => {
   const [file2, setFile2] = useState<any>();
   const [expanded, setExpanded] = useState<string[] | string>(['1']);
   const [comparision, setComparision] = useState<any>({});
+
+  const transpose = (m: any) =>
+    m[0].map((x: any, i: number) => m.map((j: any) => j[i]));
 
   const compareFiles = () => {
     const sheetsData: any = {};
@@ -40,8 +43,8 @@ const SpreadSheetComparison = ({ t }: Props) => {
           arrayValueFileTwo = arrayValueFileOne + 1;
         }
 
-        sheetData[arrayValueFileOne] = [];
-        sheetData[arrayValueFileTwo] = [];
+        sheetData[arrayValueFileOne] = [letterValue];
+        sheetData[arrayValueFileTwo] = [letterValue];
 
         for (const numberValue of Object.keys(
           currentSheetFileOne[letterValue]
@@ -56,7 +59,46 @@ const SpreadSheetComparison = ({ t }: Props) => {
         }
       }
 
-      sheetsData[sheet] = sheetData;
+      const sheetDataTransposed: Array<string[]> = transpose(sheetData);
+
+      const columns = sheetDataTransposed[0].map(
+        // eslint-disable-next-line @typescript-eslint/no-loop-func
+        (letter: string, index: number) => {
+          return {
+            title: letter,
+            dataIndex: `key-${index}`,
+            render(value: string, record: any) {
+              return {
+                props: {
+                  style: {
+                    background: index % 2 === 0 ? '#ffffff' : '#e6e6e6',
+                  },
+                },
+                children: <div>{value}</div>,
+              };
+            },
+          };
+        }
+      );
+
+      const sheetDataToCompare = sheetDataTransposed.slice(1);
+
+      const data = sheetDataToCompare.map((value, index) => {
+        const returnvalue = value.map((info, index2) => {
+          return {
+            [`key-${index2}`]: info,
+          };
+        });
+        return Object.assign({}, ...returnvalue);
+      });
+
+      // eslint-disable-next-line prefer-spread
+      const dataOfTheSheet = [].concat.apply([], data);
+
+      sheetsData[sheet] = {
+        columns,
+        data: dataOfTheSheet,
+      };
     }
 
     return sheetsData;
@@ -159,7 +201,6 @@ const SpreadSheetComparison = ({ t }: Props) => {
                     name="file1"
                     action={handleFileOne}
                     customRequest={dummyRequest}
-                    maxCount={1}
                   >
                     <Button icon={<UploadOutlined />}>
                       {t('pages.spreadsheetcomparison.uploads.file')}
@@ -171,7 +212,6 @@ const SpreadSheetComparison = ({ t }: Props) => {
                     name="file2"
                     action={handleFileTwo}
                     customRequest={dummyRequest}
-                    maxCount={1}
                   >
                     <Button icon={<UploadOutlined />}>
                       {t('pages.spreadsheetcomparison.uploads.file')}
@@ -185,7 +225,22 @@ const SpreadSheetComparison = ({ t }: Props) => {
       </Row>
 
       <Row>
-        <Col span={24} style={{ marginBottom: '5px' }} />
+        <Col span={24} style={{ marginBottom: '5px' }}>
+          {Object.keys(comparision).map((sheet, i) => (
+            <>
+              <b>{sheet}</b>
+              <Table
+                key={`table-${sheet}`}
+                columns={comparision[sheet].columns}
+                dataSource={comparision[sheet].data}
+                pagination={{ pageSize: 1000 }}
+                scroll={{ y: 400 }}
+                bordered
+                size="middle"
+              />
+            </>
+          ))}
+        </Col>
       </Row>
     </>
   );
