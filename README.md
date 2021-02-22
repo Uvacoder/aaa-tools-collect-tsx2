@@ -22,6 +22,7 @@ A Must Necessary Developer App.
 - YAML to JSON
 - Diff viewer
 - Remove duplicate lines
+- SpreadSheet Comparison
 - [Request a Feature](https://github.com/AndresMorelos/devapp/issues/new)
 
 ## Translations:

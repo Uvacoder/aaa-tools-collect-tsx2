@@ -10,7 +10,6 @@
   background-color: #fff !important;
 }
 
-
 .site-layout-background-dark {
   background-color: #001529 !important;
 }
@@ -18,7 +17,6 @@
 .content-layout-dark {
   background-color: rgb(0, 21, 41, 0.89);
 }
-
 
 .color-light {
   color: #001529 !important;
@@ -45,7 +43,6 @@
   .textarea-input {
     height: 85vh !important;
   }
-
 }
 
 @media (min-height: 768px) {
@@ -66,7 +63,6 @@
   .textarea-input {
     height: 89vh !important;
   }
-
 }
 
 @media (min-height: 992px) {
@@ -90,7 +86,6 @@
 }
 
 @media (min-height: 1200px) {
-
   .content-layout {
     margin: 17px 16px 0;
     overflow: initial;
@@ -111,7 +106,6 @@
 }
 
 @media (min-height: 1600px) {
-
   .content-layout {
     margin: 17px 16px 0;
     overflow: initial;
@@ -129,4 +123,22 @@
   .textarea-input {
     height: 90vh !important;
   }
+}
+
+.file-one {
+  background: #ffffff;
+  border-radius: 50%;
+  border: #001529 1px dotted;
+  width: 25px;
+  height: 25px;
+  margin-left: 5px;
+}
+
+.file-two {
+  background: #e6e6e6;
+  border-radius: 50%;
+  border: #001529 1px dotted;
+  width: 25px;
+  height: 25px;
+  margin-left: 5px;
 }

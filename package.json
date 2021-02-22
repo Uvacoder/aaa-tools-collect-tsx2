@@ -262,7 +262,8 @@
     "react-router-dom": "^5.2.0",
     "regenerator-runtime": "^0.13.5",
     "source-map-support": "^0.5.19",
-    "ssl-information": "^1.0.3"
+    "ssl-information": "^1.0.3",
+    "xlsx": "^0.16.9"
   },
   "devEngines": {
     "node": ">=10.x",

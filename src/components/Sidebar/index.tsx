@@ -91,6 +91,11 @@ class Sidebar extends React.Component<Props> {
               {t('app.sidebar.remove-duplicate-lines')}
             </Link>
           </Menu.Item>
+          <Menu.Item key="11" icon={<DiffOutlined />}>
+            <Link to="/spreadsheet-diff" style={{ fontSize: '0.9em' }}>
+              {t('app.sidebar.spreadsheetcomparison')}
+            </Link>
+          </Menu.Item>
           <Menu.Item key="11" icon={<SettingOutlined />}>
             <Link to="/settings" style={{ fontSize: '0.9em' }}>
               {t('app.sidebar.settings')}

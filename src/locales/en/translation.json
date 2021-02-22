@@ -11,6 +11,7 @@
     "sidebar": {
       "about": "About",
       "settings": "Settings",
+      "spreadsheetcomparison": "SpreadSheet Comparison",
       "remove-duplicate-lines": "Remove duplicate lines",
       "yaml-to-json": "YAML to JSON",
       "json-to-yaml": "JSON to YAML"
@@ -29,6 +30,15 @@
     },
     "selects": {
       "spaces": "spaces"
+    }
+  },
+  "pages": {
+    "spreadsheetcomparison": {
+      "uploads": {
+        "file": "Upload File"
+      },
+      "compare": "Compare now",
+      "limitation": "At the moment you can only make comparisons for documents with the same name sheets"
     }
   }
 }
