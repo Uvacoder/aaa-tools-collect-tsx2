@@ -21,6 +21,7 @@ A Must Necessary Developer App.
 - JSON to YAML
 - YAML to JSON
 - Diff viewer
+- Remove duplicate lines
 - [Request a Feature](https://github.com/AndresMorelos/devapp/issues/new)
 
 ## Translations:

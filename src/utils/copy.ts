@@ -1,10 +1,9 @@
 import { clipboard } from 'electron';
 
-function Copy(value: string) {
+function Copy(value: string | undefined): void {
   if (value) {
     clipboard.writeText(value);
   }
-  return null;
 }
 
 export default Copy;

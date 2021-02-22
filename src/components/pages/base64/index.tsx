@@ -7,13 +7,23 @@ import Copy from '../../../utils/copy';
 const { TextArea } = Input;
 const { Option } = Select;
 
-class Base64 extends React.Component {
-  constructor(props: any) {
+interface Props {
+  t(code: string): string;
+}
+
+interface State {
+  original: undefined | string;
+  result: undefined | string;
+  action: string;
+}
+
+class Base64 extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
-      original: null,
-      result: null,
+      original: undefined,
+      result: undefined,
       action: 'encode',
     };
 
@@ -25,11 +35,11 @@ class Base64 extends React.Component {
 
   componentDidMount() {}
 
-  onTextAreaChange(event: any) {
+  onTextAreaChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     try {
       const original = event.target.value;
 
-      this.setState((state, props) => {
+      this.setState((state) => {
         this.EncodeDecode(original, state.action);
 
         return {
@@ -39,20 +49,20 @@ class Base64 extends React.Component {
     } catch (error) {
       if (event.target.value) {
         this.setState({
-          original: null,
+          original: undefined,
           result: error.message,
         });
       } else {
         this.setState({
-          original: null,
-          result: null,
+          original: undefined,
+          result: undefined,
         });
       }
     }
   }
 
   onSelectChange(value: string) {
-    this.setState((state, prop) => {
+    this.setState((state) => {
       const action = value;
 
       this.EncodeDecode(state.original, action);
@@ -61,26 +71,28 @@ class Base64 extends React.Component {
     });
   }
 
-  EncodeDecode(value: string, action: string) {
-    let result = '';
-    switch (action) {
-      case 'encode':
-        result = Buffer.from(value, 'utf-8').toString('base64');
-        break;
-      case 'decode':
-        result = Buffer.from(value, 'base64').toString('utf-8');
-        break;
-      default:
-        break;
+  EncodeDecode(value: string | undefined, action: string) {
+    if (value) {
+      let result = '';
+      switch (action) {
+        case 'encode':
+          result = Buffer.from(value, 'utf-8').toString('base64');
+          break;
+        case 'decode':
+          result = Buffer.from(value, 'base64').toString('utf-8');
+          break;
+        default:
+          break;
+      }
+      this.setState({
+        result,
+      });
     }
-    this.setState({
-      result,
-    });
   }
 
   render() {
     const { result } = this.state;
-    // eslint-disable-next-line react/prop-types
+
     const { t } = this.props;
 
     return (

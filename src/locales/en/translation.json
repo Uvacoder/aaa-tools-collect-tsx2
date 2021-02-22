@@ -5,12 +5,16 @@
       "report": {
         "bug": "Report a bug"
       },
-      "created": "Created with ♥ by"
+      "created": "Created with ♥ by",
+      "donation": "Make a donation ♥"
     },
     "sidebar": {
       "about": "About",
       "settings": "Settings",
-      "spreadsheetcomparison": "SpreadSheet Comparison"
+      "spreadsheetcomparison": "SpreadSheet Comparison",
+      "remove-duplicate-lines": "Remove duplicate lines",
+      "yaml-to-json": "YAML to JSON",
+      "json-to-yaml": "JSON to YAML"
     },
     "languages": {
       "es": "Spanish",

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { Layout, Menu } from 'antd';
 import { Link } from 'react-router-dom';
@@ -17,7 +16,11 @@ import Base64Icon from '../../icons/base64';
 
 const { Sider } = Layout;
 
-class Sidebar extends React.Component {
+interface Props {
+  theme: string | unknown;
+  t(code: string): string;
+}
+class Sidebar extends React.Component<Props> {
   componentDidMount() {}
 
   render() {
@@ -70,12 +73,12 @@ class Sidebar extends React.Component {
           </Menu.Item>
           <Menu.Item key="7" icon={<BracketsIcon fill="white" />}>
             <Link to="/json-to-yaml" style={{ fontSize: '0.9em' }}>
-              JSON to YAML
+              {t('app.sidebar.json-to-yaml')}
             </Link>
           </Menu.Item>
           <Menu.Item key="8" icon={<BracketsIcon fill="white" />}>
             <Link to="/yaml-to-json" style={{ fontSize: '0.9em' }}>
-              YAML to JSON
+              {t('app.sidebar.yaml-to-json')}
             </Link>
           </Menu.Item>
           <Menu.Item key="9" icon={<DiffOutlined />}>
@@ -84,6 +87,11 @@ class Sidebar extends React.Component {
             </Link>
           </Menu.Item>
           <Menu.Item key="10" icon={<DiffOutlined />}>
+            <Link to="/remove-dup-lines" style={{ fontSize: '0.9em' }}>
+              {t('app.sidebar.remove-duplicate-lines')}
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="11" icon={<DiffOutlined />}>
             <Link to="/spreadsheet-diff" style={{ fontSize: '0.9em' }}>
               {t('app.sidebar.spreadsheetcomparison')}
             </Link>

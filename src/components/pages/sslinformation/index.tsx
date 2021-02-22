@@ -5,17 +5,57 @@ import { CheckCircleTwoTone, CloseCircleTwoTone } from '@ant-design/icons';
 
 const { TextArea } = Input;
 
-class SSLInformation extends React.Component {
-  constructor(props: any) {
+interface Props {
+  t(code: string): string;
+}
+
+interface State {
+  host: string | undefined;
+  certificate:
+    | {
+        subject: any;
+        issuer: any;
+        subjectaltname: string | undefined;
+        infoAccess: string[] | undefined;
+        modulus: string | undefined;
+        exponent: string | undefined;
+        valid_from: string | undefined;
+        valid_to: string | undefined;
+        fingerprint: string | undefined;
+        fingerprint256: string | undefined;
+        ext_key_usage: string[] | undefined;
+        serialNumber: string | undefined;
+        raw: Buffer | undefined;
+        isValid: boolean | undefined;
+        content: string | undefined;
+      }
+    | undefined;
+}
+
+class SSLInformation extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
       host: '',
       certificate: {
-        subjectaltname: '',
+        subject: undefined,
+        issuer: undefined,
+        subjectaltname: undefined,
+        infoAccess: undefined,
+        modulus: undefined,
+        exponent: undefined,
+        valid_from: undefined,
+        valid_to: undefined,
+        fingerprint: undefined,
+        fingerprint256: undefined,
+        ext_key_usage: undefined,
+        serialNumber: undefined,
+        raw: undefined,
+        isValid: undefined,
+        content: undefined,
       },
     };
-
     this.onInputChange = this.onInputChange.bind(this);
   }
 
@@ -36,7 +76,7 @@ class SSLInformation extends React.Component {
           })
           .catch((error) => {
             this.setState({
-              certificate: {},
+              certificate: undefined,
             });
           });
         return {
@@ -46,7 +86,7 @@ class SSLInformation extends React.Component {
     } else {
       this.setState({
         host: '',
-        certificate: {},
+        certificate: undefined,
       });
     }
   }
@@ -68,7 +108,7 @@ class SSLInformation extends React.Component {
           <Space size="small">
             <Input onChange={this.onInputChange} />
 
-            {certificate.isValid ? (
+            {certificate && certificate.isValid ? (
               <Popover
                 placement="right"
                 content={`Valid Certificate for ${host}`}
@@ -97,7 +137,7 @@ class SSLInformation extends React.Component {
           <h3>Information</h3>
           <code>
             Valid for:{' '}
-            {certificate.subjectaltname
+            {certificate && certificate.subjectaltname
               ? certificate.subjectaltname
                   .replace(/DNS:/g, '')
                   .split(',')
@@ -106,12 +146,12 @@ class SSLInformation extends React.Component {
             <br />
             <br />
             Expiration date:{' '}
-            {certificate.valid_to ? certificate.valid_to : null}
+            {certificate && certificate.valid_to ? certificate.valid_to : null}
           </code>
           <br />
           <br />
           <h3>Content</h3>
-          <TextArea rows={4} value={certificate.content} />
+          <TextArea rows={4} value={certificate && certificate.content} />
         </Col>
       </Row>
     );

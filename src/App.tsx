@@ -18,6 +18,7 @@ import URLDecoder from './components/pages/urldecoder';
 import JSONtoYaml from './components/pages/jsontoyaml';
 import YamlToJSON from './components/pages/yamltojson';
 import DiffViewer from './components/pages/diffViewer';
+import RemoveDupLines from './components/pages/removeDupLines';
 import AboutPage from './components/pages/about';
 import SettingsPage from './components/pages/settings';
 import SpreadSheetComparison from './components/pages/spreadsheetComparison';
@@ -66,6 +67,7 @@ export default function App() {
           </Header>
           <Content className="content-layout">
             <Switch>
+              <Route path="/remove-dup-lines" component={RemoveDupLines} />
               <Route path="/json-to-yaml" component={JSONtoYaml} />
               <Route path="/diff" component={DiffViewer} />
               <Route

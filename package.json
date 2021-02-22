@@ -242,12 +242,12 @@
     "yarn-deduplicate": "^3.1.0"
   },
   "dependencies": {
-    "antd": "^4.9.4",
+    "antd": "^4.10.0",
     "babel-plugin-prismjs": "^2.0.1",
-    "electron-debug": "^3.1.0",
-    "electron-log": "^4.2.4",
+    "electron-debug": "^3.2.0",
+    "electron-log": "^4.3.1",
     "electron-store": "^6.0.1",
-    "electron-updater": "^4.3.4",
+    "electron-updater": "^4.3.6",
     "history": "^5.0.0",
     "i18next": "^19.8.4",
     "i18next-browser-languagedetector": "^6.0.1",

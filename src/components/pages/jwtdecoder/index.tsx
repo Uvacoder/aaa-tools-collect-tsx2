@@ -9,8 +9,17 @@ import 'prismjs/components/prism-json';
 
 const { TextArea } = Input;
 
-class JWTDecoder extends React.Component {
-  constructor(props: any) {
+interface Props {
+  t(code: string): string;
+}
+
+interface State {
+  headers: string | undefined;
+  payload: string | undefined;
+}
+
+class JWTDecoder extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -25,7 +34,7 @@ class JWTDecoder extends React.Component {
     Prism.highlightAll();
   }
 
-  onTextAreaChange(event: any) {
+  onTextAreaChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     try {
       const payloadDecode = jwt.decode(event.target.value, {
         json: true,
@@ -54,15 +63,18 @@ class JWTDecoder extends React.Component {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  prettyJSON(value) {
-    return {
-      __html: Prism.highlight(value, Prism.languages.json, 'json'),
-    };
+  prettyJSON(value: string | undefined) {
+    if (value) {
+      return {
+        __html: Prism.highlight(value, Prism.languages.json, 'json'),
+      };
+    }
+
+    return undefined;
   }
 
   render() {
     const { payload, headers } = this.state;
-    // eslint-disable-next-line react/prop-types
     const { t } = this.props;
 
     return (

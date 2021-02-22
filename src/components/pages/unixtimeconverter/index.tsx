@@ -2,7 +2,17 @@
 import React from 'react';
 import { InputNumber, Row, Col, Switch } from 'antd';
 
-class UnixTimeConverter extends React.Component {
+interface Props {
+  t(code: string): string;
+}
+
+interface State {
+  date: number;
+  dateParsed: string | undefined;
+  format: string;
+}
+
+class UnixTimeConverter extends React.Component<Props, State> {
   constructor(props: any) {
     super(props);
 
@@ -22,10 +32,7 @@ class UnixTimeConverter extends React.Component {
   }
 
   onInputChange(value: string | number | undefined) {
-    if (
-      ![undefined, null].includes(value) &&
-      ['string', 'number'].includes(typeof value)
-    ) {
+    if (value && ['string', 'number'].includes(typeof value)) {
       const { format } = this.state;
       this.setDate(value, format);
     }

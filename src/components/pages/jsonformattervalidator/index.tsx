@@ -9,8 +9,17 @@ import Copy from '../../../utils/copy';
 const { TextArea } = Input;
 const { Option } = Select;
 
-class JSONFormatterValidator extends React.Component {
-  constructor(props: any) {
+interface Props {
+  t(code: string): string;
+}
+interface State {
+  space: number;
+  jsonValue: any;
+  jsonParsed: string | undefined;
+}
+
+class JSONFormatterValidator extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -28,7 +37,7 @@ class JSONFormatterValidator extends React.Component {
     Prism.highlightAll();
   }
 
-  onTextAreaChange(event: any) {
+  onTextAreaChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     try {
       const jsonValue = JSON.parse(event.target.value);
 
@@ -75,15 +84,18 @@ class JSONFormatterValidator extends React.Component {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  prettyJSON(value) {
-    return {
-      __html: Prism.highlight(value, Prism.languages.json, 'json'),
-    };
+  prettyJSON(value: string | undefined): any | void {
+    if (value) {
+      return {
+        __html: Prism.highlight(value, Prism.languages.json, 'json'),
+      };
+    }
+    return undefined;
   }
 
   render() {
     const { jsonParsed } = this.state;
-    // eslint-disable-next-line react/prop-types
+
     const { t } = this.props;
     return (
       <Row style={{ padding: '15px', height: '100%' }}>
