@@ -96,12 +96,12 @@ class Sidebar extends React.Component<Props> {
               {t('app.sidebar.spreadsheetcomparison')}
             </Link>
           </Menu.Item>
-          <Menu.Item key="11" icon={<SettingOutlined />}>
+          <Menu.Item key="12" icon={<SettingOutlined />}>
             <Link to="/settings" style={{ fontSize: '0.9em' }}>
               {t('app.sidebar.settings')}
             </Link>
           </Menu.Item>
-          <Menu.Item key="12" icon={<QuestionCircleFilled />}>
+          <Menu.Item key="13" icon={<QuestionCircleFilled />}>
             <Link to="/about" style={{ fontSize: '0.9em' }}>
               {t('app.sidebar.about')}
             </Link>
