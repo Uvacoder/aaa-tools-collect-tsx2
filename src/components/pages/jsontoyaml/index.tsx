@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Input, Row, Col, Button } from 'antd';
 import { CopyOutlined } from '@ant-design/icons';
 import yml from 'js-yaml';
@@ -12,47 +12,30 @@ const { TextArea } = Input;
 interface Props {
   t(code: string): string;
 }
-interface State {
-  yaml: string | undefined;
-}
 
-class JSONtoYaml extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
+const JSONtoYaml = ({ t }: Props) => {
+  const [yaml, setYaml] = useState<string | undefined>('');
 
-    this.state = {
-      yaml: '',
-    };
+  const parseYaml = (value: string | undefined) => {
+    const yamlResult = yml.dump(value).toString();
+    setYaml(yamlResult);
+  };
 
-    this.onTextAreaChange = this.onTextAreaChange.bind(this);
-    this.parseJson = this.parseJson.bind(this);
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     Prism.highlightAll();
-  }
+  }, []);
 
-  onTextAreaChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
+  const onTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     try {
-      const jsonValue = JSON.parse(event.target.value);
-      this.parseJson(jsonValue);
+      const yamlValue = JSON.parse(event.target.value);
+      parseYaml(yamlValue);
     } catch (error) {
-      this.setState({
-        yaml: '',
-      });
+      setYaml('');
     }
-  }
-
-  parseJson(value: string) {
-    const yaml = yml.dump(value).toString();
-
-    this.setState({
-      yaml: `${yaml}`,
-    });
-  }
+  };
 
   // eslint-disable-next-line class-methods-use-this
-  prettyYAML(value: string | undefined) {
+  const prettyYAML = (value: string | undefined) => {
     if (value) {
       return {
         __html: Prism.highlight(value, Prism.languages.yaml, 'yaml'),
@@ -60,30 +43,25 @@ class JSONtoYaml extends React.Component<Props, State> {
     }
 
     return undefined;
-  }
+  };
 
-  render() {
-    const { yaml } = this.state;
-
-    const { t } = this.props;
-    return (
-      <Row style={{ padding: '15px', height: '100%' }}>
-        <Col span={12}>
-          <TextArea
-            rows={23}
-            onChange={this.onTextAreaChange}
-            className="textarea-input"
-          />
-        </Col>
-        <Col span={11} offset={1}>
-          <Button icon={<CopyOutlined />} onClick={() => Copy(yaml)}>
-            {t('commons.buttons.copy')}
-          </Button>
-          <CodeView code={this.prettyYAML(yaml)} language="yaml" />
-        </Col>
-      </Row>
-    );
-  }
-}
+  return (
+    <Row style={{ padding: '15px', height: '100%' }}>
+      <Col span={12}>
+        <TextArea
+          rows={23}
+          onChange={onTextAreaChange}
+          className="textarea-input"
+        />
+      </Col>
+      <Col span={11} offset={1}>
+        <Button icon={<CopyOutlined />} onClick={() => Copy(yaml)}>
+          {t('commons.buttons.copy')}
+        </Button>
+        <CodeView code={prettyYAML(yaml)} language="yaml" />
+      </Col>
+    </Row>
+  );
+};
 
 export default withTranslation()(JSONtoYaml);

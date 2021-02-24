@@ -1,78 +1,19 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-bitwise */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { InputNumber, Row, Col, Switch } from 'antd';
 
 interface Props {
   t(code: string): string;
 }
 
-interface State {
-  date: number;
-  dateParsed: string | undefined;
-  format: string;
-}
-
-class UnixTimeConverter extends React.Component<Props, State> {
-  constructor(props: any) {
-    super(props);
-
-    this.state = {
-      date: 915148798.75,
-      dateParsed: '',
-      format: 'utc',
-    };
-
-    this.onInputChange = this.onInputChange.bind(this);
-    this.onChange = this.onChange.bind(this);
-  }
-
-  componentDidMount() {
-    const { date, format } = this.state;
-    this.setDate(date, format);
-  }
-
-  onInputChange(value: string | number | undefined) {
-    if (value && ['string', 'number'].includes(typeof value)) {
-      const { format } = this.state;
-      this.setDate(value, format);
-    }
-  }
-
-  onChange(value: boolean) {
-    this.setState((state, prop) => {
-      const format = value ? 'utc' : 'local';
-      this.setDate(state.date, format);
-      return {
-        format,
-      };
-    });
-  }
-
-  setDate(value: any, format: string) {
-    try {
-      const date = new Date(value);
-      let dateParsed = '';
-      switch (format) {
-        case 'local':
-          dateParsed = this.toISOLocal(date);
-          break;
-        case 'utc':
-          dateParsed = date.toISOString();
-          break;
-        default:
-          break;
-      }
-      this.setState({
-        date: value,
-        dateParsed,
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }
+const UnixTimeConverter = ({ t }: Props) => {
+  const [date, setDate] = useState<string | number | Date>(915148798.75);
+  const [dateParsed, setDateParsed] = useState<string | undefined>('');
+  const [format, setFormat] = useState<string>('utc');
 
   // eslint-disable-next-line class-methods-use-this
-  toISOLocal(d: Date) {
+  const toISOLocal = (d: Date) => {
     const z = (n) => `0${n}`.slice(-2);
     const zz = (n) => `00${n}`.slice(-3);
     let off = d.getTimezoneOffset();
@@ -84,36 +25,67 @@ class UnixTimeConverter extends React.Component<Props, State> {
     )}:${z(d.getMinutes())}:${z(d.getSeconds())}.${zz(
       d.getMilliseconds()
     )}${sign}${z((off / 60) | 0)}:${z(off % 60)}`;
-  }
+  };
 
-  render() {
-    const { dateParsed } = this.state;
-    return (
-      <Row style={{ padding: '15px' }}>
-        <Col span={24} style={{ textAlign: 'center' }}>
-          <h2> Unix Time Converter</h2>
-          <InputNumber
-            style={{ width: '50%' }}
-            min={0}
-            defaultValue={915148798.75}
-            onChange={this.onInputChange}
+  const converDate = () => {
+    try {
+      const dateObject = new Date(date);
+      switch (format) {
+        case 'local':
+          setDateParsed(toISOLocal(dateObject));
+          break;
+        case 'utc':
+          setDateParsed(dateObject.toISOString());
+          break;
+        default:
+          setDateParsed(undefined);
+          break;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    converDate();
+  }, [date, format]);
+
+  const onInputChange = (value: string | number | undefined) => {
+    if (value && ['string', 'number'].includes(typeof value)) {
+      setDate(value);
+    }
+  };
+
+  const onChange = (value: boolean) => {
+    const newFormat = value ? 'utc' : 'local';
+    setFormat(newFormat);
+  };
+
+  return (
+    <Row style={{ padding: '15px' }}>
+      <Col span={24} style={{ textAlign: 'center' }}>
+        <h2> Unix Time Converter</h2>
+        <InputNumber
+          style={{ width: '50%' }}
+          min={0}
+          defaultValue={915148798.75}
+          onChange={onInputChange}
+        />
+        <br />
+        <br />
+        <h3>
+          Date{' '}
+          <Switch
+            onChange={onChange}
+            checkedChildren="UTC"
+            unCheckedChildren="Local"
+            defaultChecked
           />
-          <br />
-          <br />
-          <h3>
-            Date{' '}
-            <Switch
-              onChange={this.onChange}
-              checkedChildren="UTC"
-              unCheckedChildren="Local"
-              defaultChecked
-            />
-          </h3>
-          <p>{dateParsed}</p>
-        </Col>
-      </Row>
-    );
-  }
-}
+        </h3>
+        <p>{dateParsed}</p>
+      </Col>
+    </Row>
+  );
+};
 
 export default UnixTimeConverter;

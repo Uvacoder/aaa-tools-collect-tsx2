@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Input, Row, Col, Select, Button } from 'antd';
 import { CopyOutlined } from '@ant-design/icons';
 import { withTranslation } from 'react-i18next';
@@ -14,74 +14,45 @@ interface Props {
   t(code: string): string;
 }
 
-interface State {
-  space: number;
-  json: string | undefined;
-  jsonParsed: string | undefined;
-}
+const JSONtoYaml = ({ t }: Props) => {
+  const [json, setJson] = useState<string | undefined>(undefined);
+  const [jsonParsed, setJsonParsed] = useState<string | undefined>(undefined);
+  const [space, setSpace] = useState<number>(2);
+  const [prismLoaded, setPrismLoaded] = useState<boolean>(false);
 
-class JSONtoYaml extends React.Component<Props, State> {
-  constructor(props: any) {
-    super(props);
+  const parseJson = () => {
+    setJsonParsed(JSON.stringify(json, null, space));
+  };
 
-    this.state = {
-      json: '',
-      jsonParsed: '',
-      space: 2,
-    };
+  useEffect(() => {
+    if (prismLoaded) {
+      Prism.highlightAll();
+      setPrismLoaded(true);
+    }
+    parseJson();
+  }, [json, space]);
 
-    this.onTextAreaChange = this.onTextAreaChange.bind(this);
-    this.onSelectChange = this.onSelectChange.bind(this);
-
-    this.parseJson = this.parseJson.bind(this);
-  }
-
-  componentDidMount() {
-    Prism.highlightAll();
-  }
-
-  onTextAreaChange(event: any) {
+  const onTextAreaChange = (event: any) => {
     try {
-      const json = yml.load(event.target.value);
-      if (json) {
-        const { space } = this.state;
-        this.parseJson(json, space);
-        this.setState({
-          json,
-        });
+      const jsonLoaded = yml.load(event.target.value);
+      if (jsonLoaded) {
+        setJson(jsonLoaded);
       } else {
-        this.setState({
-          jsonParsed: '',
-          json: '',
-        });
+        setJson(undefined);
+        setJsonParsed(undefined);
       }
     } catch (error) {
-      this.setState({
-        jsonParsed: '',
-        json: '',
-      });
+      setJson(undefined);
+      setJsonParsed(undefined);
     }
-  }
+  };
 
-  onSelectChange(value: string) {
-    this.setState((state, prop) => {
-      const space = parseInt(value, 10);
-
-      this.parseJson(state.json, space);
-
-      return { space };
-    });
-  }
-
-  parseJson(value: string | undefined, space: number) {
-    const jsonParsed = JSON.stringify(value, null, space);
-    this.setState({
-      jsonParsed,
-    });
-  }
+  const onSelectChange = (value: string) => {
+    setSpace(parseInt(value, 10));
+  };
 
   // eslint-disable-next-line class-methods-use-this
-  prettyJSON(value: string | undefined) {
+  const prettyJSON = (value: string | undefined) => {
     if (value) {
       return {
         __html: Prism.highlight(value, Prism.languages.json, 'json'),
@@ -89,38 +60,34 @@ class JSONtoYaml extends React.Component<Props, State> {
     }
 
     return undefined;
-  }
+  };
 
-  render() {
-    const { jsonParsed } = this.state;
-    const { t } = this.props;
-    return (
-      <Row style={{ padding: '15px', height: '100%' }}>
-        <Col span={12}>
-          <TextArea
-            rows={29}
-            onChange={this.onTextAreaChange}
-            className="textarea-input"
-          />
-        </Col>
-        <Col span={11} offset={1}>
-          <Select
-            defaultValue="2"
-            style={{ width: 120, paddingRight: '5px' }}
-            onChange={this.onSelectChange}
-          >
-            <Option value="2">2 {t('commons.selects.spaces')}</Option>
-            <Option value="4">4 {t('commons.selects.spaces')}</Option>
-            <Option value="6">6 {t('commons.selects.spaces')}</Option>
-          </Select>
-          <Button icon={<CopyOutlined />} onClick={() => Copy(jsonParsed)}>
-            {t('commons.buttons.copy')}
-          </Button>
-          <CodeView code={this.prettyJSON(jsonParsed)} language="json" />
-        </Col>
-      </Row>
-    );
-  }
-}
+  return (
+    <Row style={{ padding: '15px', height: '100%' }}>
+      <Col span={12}>
+        <TextArea
+          rows={29}
+          onChange={onTextAreaChange}
+          className="textarea-input"
+        />
+      </Col>
+      <Col span={11} offset={1}>
+        <Select
+          defaultValue="2"
+          style={{ width: 120, paddingRight: '5px' }}
+          onChange={onSelectChange}
+        >
+          <Option value="2">2 {t('commons.selects.spaces')}</Option>
+          <Option value="4">4 {t('commons.selects.spaces')}</Option>
+          <Option value="6">6 {t('commons.selects.spaces')}</Option>
+        </Select>
+        <Button icon={<CopyOutlined />} onClick={() => Copy(jsonParsed)}>
+          {t('commons.buttons.copy')}
+        </Button>
+        <CodeView code={prettyJSON(jsonParsed)} language="json" />
+      </Col>
+    </Row>
+  );
+};
 
 export default withTranslation()(JSONtoYaml);
