@@ -23,6 +23,7 @@ A Must Necessary Developer App.
 - Diff viewer
 - Remove duplicate lines
 - SpreadSheet Comparison
+- AWS Profile Manager
 - [Request a Feature](https://github.com/AndresMorelos/devapp/issues/new)
 
 ## Translations:

@@ -22,6 +22,7 @@ import RemoveDupLines from './components/pages/removeDupLines';
 import AboutPage from './components/pages/about';
 import SettingsPage from './components/pages/settings';
 import SpreadSheetComparison from './components/pages/spreadsheetComparison';
+import AWSProfileManager from './components/pages/aws-profile-manager';
 
 const { Content, Header } = Layout;
 
@@ -67,6 +68,10 @@ export default function App() {
           </Header>
           <Content className="content-layout">
             <Switch>
+              <Route
+                path="/aws-profile-manager"
+                component={AWSProfileManager}
+              />
               <Route path="/remove-dup-lines" component={RemoveDupLines} />
               <Route path="/json-to-yaml" component={JSONtoYaml} />
               <Route path="/diff" component={DiffViewer} />

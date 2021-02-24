@@ -39,6 +39,18 @@
       },
       "compare": "Compare now",
       "limitation": "At the moment you can only make comparisons for documents with the same name sheets"
+    },
+    "aws-profile-manager": {
+      "add": "Add new",
+      "makeDefault": "Make Default",
+      "delete": "Delete",
+      "default": "Default",
+      "form": {
+        "name": "Name",
+        "submit": "Submit",
+        "reset": "Reset",
+        "cancel": "Cancel"
+      }
     }
   }
 }

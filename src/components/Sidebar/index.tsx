@@ -8,6 +8,7 @@ import {
   DiffOutlined,
   QuestionCircleFilled,
   SettingOutlined,
+  AmazonOutlined,
 } from '@ant-design/icons';
 import { withTranslation } from 'react-i18next';
 import JwtIcon from '../../icons/jwtIcon';
@@ -89,6 +90,11 @@ const Sidebar = ({ t, theme }: Props) => {
         <Menu.Item key="11" icon={<DiffOutlined />}>
           <Link to="/spreadsheet-diff" style={{ fontSize: '0.9em' }}>
             {t('app.sidebar.spreadsheetcomparison')}
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="14" icon={<AmazonOutlined />}>
+          <Link to="/aws-profile-manager" style={{ fontSize: '0.9em' }}>
+            AWS Profile Manager
           </Link>
         </Menu.Item>
         <Menu.Item key="12" icon={<SettingOutlined />}>

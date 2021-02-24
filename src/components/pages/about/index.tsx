@@ -10,7 +10,7 @@ interface Props {
 const AboutPage = ({ t }: Props) => {
   return (
     <div style={{ textAlign: 'center' }}>
-      {`${t('app.about.created')} `}
+      {t('app.about.created')}
       <a className="js-external-link" href="https://andresmorelos.dev">
         Andres Morelos
       </a>
