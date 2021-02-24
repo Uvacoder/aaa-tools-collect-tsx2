@@ -39,6 +39,18 @@
       },
       "compare": "Comparar",
       "limitation": "Por el momento solo se puede realizar comparaciones para documentos con el mismo nombre en las hojas"
+    },
+    "aws-profile-manager": {
+      "add": "Agregar Nuevo",
+      "makeDefault": "Por defecto",
+      "delete": "Eliminar",
+      "default": "Por Defecto",
+      "form": {
+        "name": "Nombre",
+        "submit": "Enviar",
+        "reset": "Reiniciar",
+        "cancel": "Cancelar"
+      }
     }
   }
 }
