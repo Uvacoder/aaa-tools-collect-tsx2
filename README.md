@@ -24,6 +24,7 @@ A Must Necessary Developer App.
 - Remove duplicate lines
 - SpreadSheet Comparison
 - AWS Profile Manager
+- JSON to Excel/CSV
 - [Request a Feature](https://github.com/AndresMorelos/devapp/issues/new)
 
 ## Translations:

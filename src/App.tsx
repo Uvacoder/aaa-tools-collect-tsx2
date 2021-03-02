@@ -23,6 +23,7 @@ import AboutPage from './components/pages/about';
 import SettingsPage from './components/pages/settings';
 import SpreadSheetComparison from './components/pages/spreadsheetComparison';
 import AWSProfileManager from './components/pages/aws-profile-manager';
+import JSONToExcelOrCSV from './components/pages/json-to-excel-or-csv';
 
 const { Content, Header } = Layout;
 
@@ -71,6 +72,10 @@ export default function App() {
               <Route
                 path="/aws-profile-manager"
                 component={AWSProfileManager}
+              />
+              <Route
+                path="/json-to-excel-or-csv"
+                component={JSONToExcelOrCSV}
               />
               <Route path="/remove-dup-lines" component={RemoveDupLines} />
               <Route path="/json-to-yaml" component={JSONtoYaml} />
