@@ -9,6 +9,7 @@ import {
   QuestionCircleFilled,
   SettingOutlined,
   AmazonOutlined,
+  FileExcelOutlined,
 } from '@ant-design/icons';
 import { withTranslation } from 'react-i18next';
 import JwtIcon from '../../icons/jwtIcon';
@@ -95,6 +96,11 @@ const Sidebar = ({ t, theme }: Props) => {
         <Menu.Item key="14" icon={<AmazonOutlined />}>
           <Link to="/aws-profile-manager" style={{ fontSize: '0.9em' }}>
             AWS Profile Manager
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="15" icon={<FileExcelOutlined />}>
+          <Link to="/json-to-excel-or-csv" style={{ fontSize: '0.9em' }}>
+            {t('app.sidebar.json-to-excel-or-csv')}
           </Link>
         </Menu.Item>
         <Menu.Item key="12" icon={<SettingOutlined />}>

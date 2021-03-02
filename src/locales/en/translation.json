@@ -14,7 +14,8 @@
       "spreadsheetcomparison": "SpreadSheet Comparison",
       "remove-duplicate-lines": "Remove duplicate lines",
       "yaml-to-json": "YAML to JSON",
-      "json-to-yaml": "JSON to YAML"
+      "json-to-yaml": "JSON to YAML",
+      "json-to-excel-or-csv": "JSON To Excel/CSV"
     },
     "languages": {
       "es": "Spanish",
@@ -30,13 +31,14 @@
     },
     "selects": {
       "spaces": "spaces"
-    }
+    },
+    "uploads": {
+      "file": "Upload File"
+    },
+    "export": "Export"
   },
   "pages": {
     "spreadsheetcomparison": {
-      "uploads": {
-        "file": "Upload File"
-      },
       "compare": "Compare now",
       "limitation": "At the moment you can only make comparisons for documents with the same name sheets"
     },

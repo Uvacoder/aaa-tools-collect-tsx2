@@ -275,7 +275,7 @@ const SpreadSheetComparison = ({ t }: Props) => {
                     onRemove={handleRemoveFileOne}
                   >
                     <Button icon={<UploadOutlined />}>
-                      {t('pages.spreadsheetcomparison.uploads.file')}
+                      {t('commons.uploads.file')}
                     </Button>
                   </Upload>
                 </Col>
@@ -288,7 +288,7 @@ const SpreadSheetComparison = ({ t }: Props) => {
                     onRemove={handleRemoveFileTwo}
                   >
                     <Button icon={<UploadOutlined />}>
-                      {t('pages.spreadsheetcomparison.uploads.file')}
+                      {t('commons.uploads.file')}
                     </Button>
                   </Upload>
                 </Col>
