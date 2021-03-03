@@ -25,6 +25,7 @@ A Must Necessary Developer App.
 - SpreadSheet Comparison
 - AWS Profile Manager
 - JSON to Excel/CSV
+- Status Tracker
 - [Request a Feature](https://github.com/AndresMorelos/devapp/issues/new)
 
 ## Translations:

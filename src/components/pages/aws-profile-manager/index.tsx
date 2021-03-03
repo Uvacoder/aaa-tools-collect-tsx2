@@ -201,24 +201,6 @@ const AWSProfileManager = ({ t }: Props) => {
               ))}
             </Select>
           </Form.Item>
-          <Form.Item
-            noStyle
-            shouldUpdate={(prevValues, currentValues) =>
-              prevValues.gender !== currentValues.gender
-            }
-          >
-            {({ getFieldValue }) => {
-              return getFieldValue('gender') === 'other' ? (
-                <Form.Item
-                  name="customizeGender"
-                  label="Customize Gender"
-                  rules={[{ required: true }]}
-                >
-                  <Input />
-                </Form.Item>
-              ) : null;
-            }}
-          </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit">
               {t('pages.aws-profile-manager.form.submit')}

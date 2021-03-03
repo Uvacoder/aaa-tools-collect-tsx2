@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Layout, Row, Col } from 'antd';
 import UserSettings from './services/settings';
+import feeder from './utils/FeedReader';
 
 // eslint-disable-next-line import/extensions
 import './helpers/external_links.ts';
@@ -24,6 +25,7 @@ import SettingsPage from './components/pages/settings';
 import SpreadSheetComparison from './components/pages/spreadsheetComparison';
 import AWSProfileManager from './components/pages/aws-profile-manager';
 import JSONToExcelOrCSV from './components/pages/json-to-excel-or-csv';
+import StatusTracker from './components/pages/status-tracker';
 
 const { Content, Header } = Layout;
 
@@ -41,6 +43,9 @@ export default function App() {
 
   useEffect(() => {
     i18n.changeLanguage(userLang);
+    return () => {
+      feeder.destroy();
+    };
   }, []);
 
   const changeTheme = (value: boolean) => {
@@ -77,6 +82,7 @@ export default function App() {
                 path="/json-to-excel-or-csv"
                 component={JSONToExcelOrCSV}
               />
+              <Route path="/status-tracker" component={StatusTracker} />
               <Route path="/remove-dup-lines" component={RemoveDupLines} />
               <Route path="/json-to-yaml" component={JSONtoYaml} />
               <Route path="/diff" component={DiffViewer} />
