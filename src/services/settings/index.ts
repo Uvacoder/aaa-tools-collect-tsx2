@@ -7,7 +7,7 @@ class UserSettings {
     this.store.set(key, value);
   }
 
-  Get(key: string): unknown {
+  Get(key: string): any {
     return this.store.get(key);
   }
 }

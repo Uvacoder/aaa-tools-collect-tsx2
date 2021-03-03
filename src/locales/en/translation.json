@@ -15,7 +15,8 @@
       "remove-duplicate-lines": "Remove duplicate lines",
       "yaml-to-json": "YAML to JSON",
       "json-to-yaml": "JSON to YAML",
-      "json-to-excel-or-csv": "JSON To Excel/CSV"
+      "json-to-excel-or-csv": "JSON To Excel/CSV",
+      "status-tracker": "Status Tracker"
     },
     "languages": {
       "es": "Spanish",
@@ -27,7 +28,8 @@
   },
   "commons": {
     "buttons": {
-      "copy": "Copy"
+      "copy": "Copy",
+      "delete": "Delete"
     },
     "selects": {
       "spaces": "spaces"
@@ -52,6 +54,16 @@
         "submit": "Submit",
         "reset": "Reset",
         "cancel": "Cancel"
+      }
+    },
+    "statusTracker": {
+      "openIncident": "Open Incident",
+      "times": {
+        "30 seconds": "30 seconds",
+        "1 minute": "1 minute",
+        "5 minutes": "5 minutes",
+        "15 minutes": "15 minutes",
+        "30 minutes": "30 minutes"
       }
     }
   }
