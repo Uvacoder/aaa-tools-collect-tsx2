@@ -246,7 +246,7 @@
     "aws-accounts": "^2.1.0",
     "babel-plugin-prismjs": "^2.0.1",
     "electron-debug": "^3.2.0",
-    "electron-log": "^4.3.1",
+    "electron-log": "^4.3.2",
     "electron-store": "^6.0.1",
     "electron-updater": "^4.3.6",
     "history": "^5.0.0",
