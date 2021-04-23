@@ -1,7 +1,8 @@
 import React from 'react';
-import { Select } from 'antd';
 import { withTranslation } from 'react-i18next';
+import { Select } from 'antd';
 import { languages } from '../../constants.json';
+import UserSettings from '../../services/settings';
 
 const { Option } = Select;
 
@@ -13,6 +14,7 @@ interface Props {
 const LangSwitcher = ({ t, i18n }: Props) => {
   function handleChange(value: string) {
     i18n.changeLanguage(value);
+    UserSettings.Save('settings.lang', value);
   }
 
   return (
