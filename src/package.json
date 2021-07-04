@@ -1,7 +1,7 @@
 {
   "name": "developer-toolbox",
   "productName": "Developer ToolBox",
-  "version": "1.12.0",
+  "version": "1.12.1",
   "description": "A Must Necessary Developer App",
   "main": "./main.prod.js",
   "author": {

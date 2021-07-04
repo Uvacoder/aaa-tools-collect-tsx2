@@ -39,7 +39,7 @@ export default function App() {
     ? UserSettings.Get('settings.lang')
     : 'en';
 
-  const [theme = userTheme, setTheme] = useState();
+  const [theme = userTheme, setTheme] = useState<string>();
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
