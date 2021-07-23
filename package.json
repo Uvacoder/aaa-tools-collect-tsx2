@@ -262,7 +262,7 @@
     "react-dom": "^17.0.2",
     "react-i18next": "^11.9.0",
     "react-router-dom": "^5.2.0",
-    "regenerator-runtime": "^0.13.5",
+    "regenerator-runtime": "^0.13.8",
     "rss-feed-emitter": "^3.2.2",
     "source-map-support": "^0.5.19",
     "ssl-information": "^1.0.3",
