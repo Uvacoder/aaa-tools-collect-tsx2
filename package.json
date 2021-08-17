@@ -248,7 +248,7 @@
     "electron-debug": "^3.2.0",
     "electron-log": "^4.4.0",
     "electron-store": "^6.0.1",
-    "electron-updater": "^4.4.1",
+    "electron-updater": "^4.3.9",
     "history": "^5.0.0",
     "i18next": "^19.9.0",
     "i18next-browser-languagedetector": "^6.1.2",

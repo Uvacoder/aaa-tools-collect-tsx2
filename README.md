@@ -27,6 +27,7 @@ A Must Necessary Developer App.
 - AWS Profile Manager
 - JSON to Excel/CSV
 - Status Tracker
+- Regex Tester
 - [Request a Feature](https://github.com/AndresMorelos/devapp/issues/new)
 
 ## Translations:
