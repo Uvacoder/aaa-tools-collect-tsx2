@@ -13,26 +13,30 @@ interface Props {
 
 const RegexTester = ({ t }: Props) => {
   const [regex, setRegex] = useState<RegExp | undefined>(undefined);
+  const [regexValue, setRegexValue] = useState<string>('');
   const [textAreaInput, setTextAreaInput] = useState<string>('');
   const [result, setResult] = useState<string | null>(null);
+  const [optionsSelected, setOptionsSelectd] = useState<string[]>(['g', 'm']);
 
-  const matchRegexp = (str: string) => {
-    if (regex) {
+  const matchRegexp = (str: string, rg: RegExp | undefined) => {
+    if (rg) {
       let m;
       let resultRegex = '';
 
       // eslint-disable-next-line no-cond-assign
-      while ((m = regex.exec(str)) !== null) {
+      while ((m = rg.exec(str)) !== null) {
         // This is necessary to avoid infinite loops with zero-width matches
-        if (m.index === regex.lastIndex) {
-          regex.lastIndex += 1;
+        if (m.index === rg.lastIndex) {
+          rg.lastIndex += 1;
         }
 
         // The result can be accessed through the `m`-variable.
         // eslint-disable-next-line @typescript-eslint/no-loop-func
-        m.forEach((match: any, groupIndex: number) => {
+        m.forEach((match: any, groupIndex: number, data: string[]) => {
           if (match) {
-            resultRegex += `Group ${groupIndex} Match: ${match}\n`;
+            resultRegex += `Group ${groupIndex} | Index: ${data.index} - ${
+              data.index + match.length
+            } | Match: ${match.replace('\n', '↵')}  \n`;
           }
         });
         setResult(resultRegex);
@@ -45,7 +49,7 @@ const RegexTester = ({ t }: Props) => {
       const testIntput = event.target.value;
       setTextAreaInput(testIntput);
       if (regex) {
-        matchRegexp(testIntput);
+        matchRegexp(testIntput, regex);
       }
     } catch (error) {
       if (event.target.value) {
@@ -59,16 +63,29 @@ const RegexTester = ({ t }: Props) => {
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
       setResult(null);
-      const regexValue = event.target.value;
-      const regexp = new RegExp(regexValue, 'g');
+      setRegexValue(event.target.value);
+      const inputValue = event.target.value;
+      const regexp = new RegExp(inputValue, optionsSelected.join(''));
       setRegex(regexp);
+
+      if (textAreaInput) {
+        matchRegexp(textAreaInput, regexp);
+      }
     } catch (error) {
       setResult(null);
     }
   };
 
-  const handleSelectChange = (value) => {
-    console.log(value);
+  const handleSelectChange = (value: string[]) => {
+    if (value !== optionsSelected && value.length > 0) {
+      setOptionsSelectd(value);
+      const regexp = new RegExp(regexValue, value.join(''));
+      setRegex(regexp);
+
+      if (textAreaInput) {
+        matchRegexp(textAreaInput, regexp);
+      }
+    }
   };
 
   return (
@@ -83,15 +100,15 @@ const RegexTester = ({ t }: Props) => {
               mode="multiple"
               allowClear
               placeholder="Please select"
-              defaultValue={['a10', 'c12']}
+              defaultValue={optionsSelected}
               onChange={handleSelectChange}
             >
-              <Option key={1} value={1}>
-                g
-              </Option>
-              <Option key={2} value={2}>
-                m
-              </Option>
+              <Option value="g">g</Option>
+              <Option value="m">m</Option>
+              <Option value="i">i</Option>
+              <Option value="y">y</Option>
+              <Option value="u">u</Option>
+              <Option value="s">s</Option>
             </Select>
           </Col>
         </Row>
