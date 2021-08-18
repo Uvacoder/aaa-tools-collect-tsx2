@@ -39,7 +39,8 @@
       "main.prod.js",
       "main.prod.js.map",
       "package.json",
-      "locales"
+      "locales",
+      "plugins"
     ],
     "afterSign": ".erb/scripts/Notarize.js",
     "mac": {
@@ -256,6 +257,7 @@
     "js-yaml": "^4.1.0",
     "json-2-csv": "^3.14.0",
     "jsonwebtoken": "^8.5.1",
+    "live-plugin-manager": "0.15.0",
     "prismjs": "^1.24.1",
     "react": "^17.0.2",
     "react-diff-viewer": "^3.1.1",

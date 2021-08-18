@@ -23,8 +23,9 @@ const { Sider } = Layout;
 interface Props {
   theme: 'light' | 'dark' | undefined;
   t(code: string): string;
+  plugins: any[];
 }
-const Sidebar = ({ t, theme }: Props) => {
+const Sidebar = ({ t, theme, plugins }: Props) => {
   return (
     <Sider
       style={{

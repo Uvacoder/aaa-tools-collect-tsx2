@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Layout, Row, Col } from 'antd';
 import UserSettings from './services/settings';
+import PluginRepository from './services/pluginRepository';
 import feeder from './utils/FeedReader';
 
 // eslint-disable-next-line import/extensions
@@ -29,6 +30,16 @@ import StatusTracker from './components/pages/status-tracker';
 import RegrexTester from './components/pages/regex-teser';
 
 const { Content, Header } = Layout;
+
+const pluginsToImport = PluginRepository.getInstance().pluginManager.list();
+const plugins: any[] = [];
+// eslint-disable-next-line no-restricted-syntax
+for (const pluginToImport of pluginsToImport) {
+  const pluginImported = PluginRepository.getInstance().pluginManager.require(
+    pluginToImport.name
+  );
+  plugins.push(pluginImported);
+}
 
 export default function App() {
   const userTheme = UserSettings.Get('settings.theme')
@@ -58,7 +69,7 @@ export default function App() {
   return (
     <Router>
       <Layout className={`site-layout-background-${theme}`}>
-        <Sidebar theme={theme} />
+        <Sidebar theme={theme} plugins={plugins} />
         <Layout style={{ marginLeft: 200 }}>
           <Header
             className={`site-layout-background-${theme}`}
