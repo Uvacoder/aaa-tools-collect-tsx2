@@ -266,7 +266,7 @@
     "rss-feed-emitter": "^3.2.2",
     "source-map-support": "^0.5.19",
     "ssl-information": "^1.0.3",
-    "xlsx": "^0.17.0"
+    "xlsx": "^0.17.1"
   },
   "devEngines": {
     "node": ">=10.x",
