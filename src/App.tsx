@@ -23,6 +23,7 @@ import RemoveDupLines from './components/pages/removeDupLines';
 import AboutPage from './components/pages/about';
 import SettingsPage from './components/pages/settings';
 import SpreadSheetComparison from './components/pages/spreadsheetComparison';
+import SpreadsheetMerge from './components/pages/spreadsheetMerge';
 import AWSProfileManager from './components/pages/aws-profile-manager';
 import JSONToExcelOrCSV from './components/pages/json-to-excel-or-csv';
 import StatusTracker from './components/pages/status-tracker';
@@ -91,6 +92,7 @@ export default function App() {
                 path="/spreadsheet-diff"
                 component={SpreadSheetComparison}
               />
+              <Route path="/spreadsheet-merge" component={SpreadsheetMerge} />
               <Route path="/yaml-to-json" component={YamlToJSON} />
               <Route path="/url-decoder" component={URLDecoder} />
               <Route

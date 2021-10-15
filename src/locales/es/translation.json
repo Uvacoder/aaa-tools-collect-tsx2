@@ -17,7 +17,8 @@
       "json-to-yaml": "JSON a YAML",
       "json-to-excel-or-csv": "JSON a Excel/CSV",
       "status-tracker": "Rastreador de estado",
-      "regextester": "Expresiones Regulares"
+      "regextester": "Expresiones Regulares",
+      "spreadsheetmerge": "Unir Excel"
     },
     "languages": {
       "es": "Español",
@@ -44,6 +45,9 @@
     "spreadsheetcomparison": {
       "compare": "Comparar",
       "limitation": "Por el momento solo se puede realizar comparaciones para documentos con el mismo nombre en las hojas"
+    },
+    "spreadsheetmerge": {
+      "merge": "Unir Ahora"
     },
     "aws-profile-manager": {
       "add": "Agregar Nuevo",

@@ -11,6 +11,7 @@ import {
   AmazonOutlined,
   FileExcelOutlined,
   CheckCircleOutlined,
+  MergeCellsOutlined,
 } from '@ant-design/icons';
 import { withTranslation } from 'react-i18next';
 import JwtIcon from '../../icons/jwtIcon';
@@ -98,6 +99,11 @@ const Sidebar = ({ t, theme }: Props) => {
         <Menu.Item key="11" icon={<DiffOutlined />}>
           <Link to="/spreadsheet-diff" style={{ fontSize: '0.9em' }}>
             {t('app.sidebar.spreadsheetcomparison')}
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="18" icon={<MergeCellsOutlined />}>
+          <Link to="/spreadsheet-merge" style={{ fontSize: '0.9em' }}>
+            {t('app.sidebar.spreadsheetmerge')}
           </Link>
         </Menu.Item>
         <Menu.Item key="14" icon={<AmazonOutlined />}>

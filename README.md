@@ -28,6 +28,7 @@ A Must Necessary Developer App.
 - JSON to Excel/CSV
 - Status Tracker
 - Regex Tester
+- Merge Excel files
 - [Request a Feature](https://github.com/AndresMorelos/devapp/issues/new)
 
 ## Translations:

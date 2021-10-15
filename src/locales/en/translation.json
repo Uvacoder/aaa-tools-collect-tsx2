@@ -17,7 +17,8 @@
       "json-to-yaml": "JSON to YAML",
       "json-to-excel-or-csv": "JSON To Excel/CSV",
       "status-tracker": "Status Tracker",
-      "regextester": "Regex Tester"
+      "regextester": "Regex Tester",
+      "spreadsheetmerge": "SpreadSheet Merge"
     },
     "languages": {
       "es": "Spanish",
@@ -44,6 +45,9 @@
     "spreadsheetcomparison": {
       "compare": "Compare now",
       "limitation": "At the moment you can only make comparisons for documents with the same name sheets"
+    },
+    "spreadsheetmerge": {
+      "merge": "Merge now"
     },
     "aws-profile-manager": {
       "add": "Add new",
